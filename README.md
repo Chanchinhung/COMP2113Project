@@ -49,7 +49,7 @@ Detail of rules:
 	If the round ends in a draw, the player's initial bet is returned by the dealer.  
 2.  
 	Numerical values of cards (does not depend on suit):  
-	Ace - 1 or 11 (according to the player's choice)  
+	Ace - 1 or 11 (according to the player's choice, choose before the start of the game)  
 	Two - 2  
 	Three - 3  
 	.  
