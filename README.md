@@ -2,8 +2,8 @@
 <ins>"Blackjack"</ins>  
 by Sam, Ryan, Arnold, and Zay
 
-Name: Sam  
-UID:  
+Name: Kam Lap Hang (Sam)
+UID: 3035940998
 Name: Robert Miles Ryan Reese  
 UID: 3035743584  
 Name: Arnold  
