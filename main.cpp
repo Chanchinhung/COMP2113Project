@@ -1,5 +1,57 @@
 #include <iostream>
+#include<cstdlib>
+#include<fstream>
 using namespace std;
+
+class BlackJack{
+//You may refer to Module 7 Lecture Notes P.42 on how to use a Class
+public:
+    //Please add your functions here:
+    void initialdeck();
+    
+
+private:
+    //Please add the member variables here:
+    int cardvalue[52]; //The Value of the card in BlackJack Game
+    string cardname[52]; //The Name of the Card 
+    int A_choice; //The choice of the value of Ace (1 or 11)
+    int P_Cards[5]; //The cards of the Player (P:Player), this will store the integers "i" returned by the randomnumber function
+    int D_Cards[5]; //The cards of the Dealer (D:Dealer), this will store the integers "i" returned by the randomnumber function
+    int P_noofcards; //The number of cards of the Player (P:Player)
+    int D_noofcards; //The number of cards of the Dealer (D:Dealer)
+}
+
+//Hello Guys I'm Sam! I'm going to make the Deck information part and assign random cards to the player and the dealer...
+//Please just make sure we are not doing the same thing! Thanks!
+
+void BlackJack::initialdeck(){
+    //This program is to initialise the arrays of CardValue and CardName
+    //We can then use cardvalue[i] and cardname[i] to access the value and the name of card i, 
+    //    where i is an integer returned by the randomnumber function
+    ifstream fin;
+    fin.open(Deck_information.txt);
+    if (fin.fail()){
+        cout << "Error Opening the Deck_Information file" << endl;
+        exit(1);
+    }
+    int part1;
+    string part2;
+    int i=0;
+    while (fin>>part1>>part2){
+        cardvalue[i]=part1;
+        cardname[i]=part2;
+        i+=1;
+    }
+    file.close();
+}
+
+int randomnumber(){
+    // Return a random number ranging from 0-52.
+    
+    srand((unsigned) time(NULL)); 
+    int random = 0 + (rand() % 53);
+    return random;
+}
 
 void game_menu(char &choice){
 	cout << "Options\nN: New Game\nL: Load Game\nQ: Quit\nYour Choice: ";
