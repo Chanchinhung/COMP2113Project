@@ -1,5 +1,6 @@
 #include<fstream>
-#include<Cards.h>
+#include<iostream>
+#include<RoundStat.h>
 using namespace std;
 int loadWLstat(vector<RoundStat> WLrec){
   char filename[] = "WLstat.txt";
@@ -16,5 +17,6 @@ int loadWLstat(vector<RoundStat> WLrec){
     fin >> temp.moneywon;
     WLrec.push_back(temp);
   }
+  fin.close();
   return 0;
 }
