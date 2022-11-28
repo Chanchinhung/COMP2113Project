@@ -1,8 +1,11 @@
 #include<Cards.h>
 #include<cstlib>
+#include<ctime>
 using namespace std;
 Cards* DealCard(Cards *head){
+  
   Cards *hit = new Cards;
+  srand(time(NULL));
   hit->cardval=rand()%13 + 1;
   switch (hit->cardval){
     case 1:
