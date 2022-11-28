@@ -3,7 +3,7 @@
 #include<ctime>
 using namespace std;
 Cards* DealCard(Cards *head){
-  
+  //This program return a Cards Structure that stores the value and the face of a card that is randomly drawn by the rand() function
   Cards *hit = new Cards;
   srand(time(NULL));
   hit->cardval=rand()%13 + 1;
