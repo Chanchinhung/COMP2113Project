@@ -75,14 +75,14 @@ int PlayRound (int &playermoney, &housemoney; &vector<RoundStat> WLrec){
     WLrec.push_back(temp);
     return 0;
   }
-  if (CardValSum(househead)=CardValSum(playerhead)){
+  switch DetermineWinner(playerhead, househead){
+    3:
     cout << "You hand is as good as house's. You draw this round." << endl;
     temp.WL='D';
     temp.moneywon=0;
     WLrec.push_back(temp);
     return 0;
-  }
-  if (CardValSum(househead)>CardValSum(playerhead){
+    1:
     cout << "House has better hand. You lost this round." << endl;
     playermoney-=bet;
     housemoney+=bet;
@@ -90,8 +90,7 @@ int PlayRound (int &playermoney, &housemoney; &vector<RoundStat> WLrec){
     temp.moneywon=-bet;
     WLrec.push_back(temp);
     return 0;
-  }
-  if (CardValSum(househead)<CardValSum(playerhead){
+    2:
     cout << "You have better hand. You win this round!" << endl;
     playermoney+=bet;
     housemoney-=bet;
