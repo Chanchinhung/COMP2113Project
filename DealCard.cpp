@@ -1,58 +1,58 @@
-#include<Cards.h>
-#include<cstlib>
+#include"Cards.h"
+#include<cstdlib>
 #include<ctime>
 using namespace std;
 Cards* DealCard(Cards *head){
-  //This program return a Cards Structure that stores the value and the face of a card that is randomly drawn by the rand() function
-  Cards *hit = new Cards;
+  //This function return the linked list of Cards Structure that stores the value and the face of cards in hand, with a new card that is randomly drawn by the rand() function inserted
+  Cards *hit = new Cards; //new node for the card hit
   srand(time(NULL));
-  hit->cardval=rand()%13 + 1;
-  switch (hit->cardval){
+  hit->cardval=rand()%13 + 1; //randomly hit a card
+  switch (hit->cardval){ //assign value of card according to its face, A is assigned as 1, 10/J/Q/K as 10
     case 1:
-      hit->cardface='A';
+      hit->cardface="A";
       break;
     case 2:
-      hit->cardface='2';
+      hit->cardface="2";
       break;
     case 3:
-      hit->cardface='3';
+      hit->cardface="3";
       break;
     case 4:
-      hit->cardface='4';
+      hit->cardface="4";
       break;
     case 5:
-      hit->cardface='5';
+      hit->cardface="5";
       break;
     case 6:
-      hit->cardface='6';
+      hit->cardface="6";
       break;
     case 7:
-      hit->cardface='7';
+      hit->cardface="7";
       break;  
     case 8:
-      hit->cardface='8';
+      hit->cardface="8";
       break;
     case 9:
-      hit->cardface='9';
+      hit->cardface="9";
       break;  
     case 10:
-      hit->cardface='10';
+      hit->cardface="10";
       break;
     case 11:
-      hit->cardface='J';
+      hit->cardface="J";
       hit->cardval=10;
       break;
     case 12:
-      hit->cardface='Q';
+      hit->cardface="Q";
       hit->cardval=10;
       break;
     case 13:
-      hit->cardface='K';
+      hit->cardface="K";
       hit->cardval=10;
       break;  
   }
   hit->next=head;
-  head=hit;
+  head=hit; //insert the node to the linked list
   return head;
 }
 

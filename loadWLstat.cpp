@@ -2,7 +2,7 @@
 #include<iostream>
 #include<RoundStat.h>
 using namespace std;
-int loadWLstat(vector<RoundStat> WLrec){
+int loadWLstat(vector<RoundStat> WLrec){ //function that loads the statistics of rounds from file
   char filename[] = "WLstat.txt";
   char WL;
   int bet;
