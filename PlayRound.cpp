@@ -177,5 +177,11 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
     return;
 }
 
+int main() {
+    vector<RoundStat> test;
+    PlayRound(1000, 1000, test);
+    return 0;
+}
+
 
 
