@@ -7,7 +7,6 @@ void display_start() {
 	cout << "===============================" << endl;
     cout << "Welcome to the Blackjack Casino" << endl;
     cout << "===============================" << endl;
-	cout << "By Sam, Ryan, Arnold, and Zay." << endl;
 }
 
 void display_gm1() {
