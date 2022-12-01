@@ -1,5 +1,5 @@
 //function for calculating the total value of the cards hit
-#include "Cards.h"
+#include "Card.h"
 #include <cstddef>
 int CardValSum(Cards *head){
   Cards *current;

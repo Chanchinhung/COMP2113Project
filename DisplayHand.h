@@ -3,5 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include "Cards.h"
-int DisplayHand(Cards *head);
+void displaycards(vector<card>);
+bool has_ace(vector<card>);
+void displaytotalvalue(vector<card>);
 #endif

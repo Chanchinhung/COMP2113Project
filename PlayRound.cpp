@@ -3,36 +3,66 @@
 #include <vector>
 #include <chrono>
 #include <thread>
-#include "Cards.h"
 #include "RoundStat.h"
 #include "CardValSum.h"
 #include "DealCard.h"
 #include "DisplayHand.h"
 #include "DetermineWinner.h"
 #include "PlayRound.h"
+#include "Card.h"
 using namespace std;
 
-int PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
-  Cards *playerhead=NULL;
-  Cards *househead=NULL;
-  int bet=0;
-  char choice;
-  RoundStat temp;
-  cout << "Round start!" << endl;
-  cout << "How much you would like to bet? You have $" << playermoney <<" left.";
-  while ((bet<=0)||(bet>playermoney)){
-    cout << "Please enter an positive integer from 1 to "<< playermoney << ": ";
+void start_round(int &playermoney, int &housemoney) {
+    cout << "==============" << endl;
+    cout << "Start of Round" << endl;
+    cout << "==============" << endl;
+    cout << "Your money: " << playermoney << endl;
+    cout << "House money: " << housemoney << endl;
+}
+
+void enter_bet(int &bet, int &playermoney) {
+    cout << "Bet: $";
     cin >> bet;
-  }
-  playerhead=DealCard(playerhead);
-  std::this_thread::sleep_for(500ms);
-  playerhead=DealCard(playerhead);
-  cout << "Your hand: ";
-  DisplayHand(playerhead);
-  cout << "Current hand value: " << CardValSum(playerhead) << endl;
-  cout << "What will you do? (Please enter the corresponding character)" <<endl;
-  cout << "H: Hit S:Stand D: Double Down X:Surrender" <<endl;
-  while ((choice!='S')&&(choice!='X')&&(choice!='D')&&(CardValSum(playerhead)<21)){
+    while ((bet<=0) || (bet>playermoney)) {
+        if (bet<=0) {
+            cout << "You have to bet at least $1" << endl;
+            cout << "Bet: $";
+            cin >> bet;
+        }
+        if (bet>playermoney) {
+            cout << "You cannot be bet " << bet << ", you only have " << playermoney << endl;
+            cout << "Bet: $";
+            cin >> bet;
+        }
+    }
+}
+
+void player_draw_display() {
+    cout << "=====================" << endl;
+    cout << "You have drawn a card" << endl;
+    cout << "=====================" << endl;
+}
+
+int PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
+    vector<card> player_cards;
+    vector<card> house_cards;
+    int bet;
+    char choice;
+    RoundStat temp;
+    start_round(playermoney, housemoney);
+    enter_bet(bet, playermoney);
+    
+    dealcard(player_cards);
+    player_draw_display();
+    std::this_thread::sleep_for(500ms);
+    dealcard(player_cards);
+    player_draw_display();
+    cout << "Your hand:" << endl;
+    displaycards(player_cards);
+    cout << "Current hand value: " << displaytotalvalue(player_cards) << endl;
+    cout << "What will you do? (Please enter the corresponding character)" <<endl;
+    cout << "H: Hit S:Stand D: Double Down X:Surrender" <<endl;
+    while ((choice!='S')&&(choice!='X')&&(choice!='D')&&(CardValSum(playerhead)<21)){
     cout << "Your choice: ";
     cin >> choice;
     if (choice=='X'){

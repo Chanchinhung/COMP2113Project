@@ -1,58 +1,30 @@
-#include"Cards.h"
-#include<cstdlib>
-#include<ctime>
+#include <cstdlib>
+#include <ctime>
+#include <vector>
+#include <map>
+#include "Card.h"
+#include "DealCard.h"
 using namespace std;
-Cards* DealCard(Cards *head){
-  //This function return the linked list of Cards Structure that stores the value and the face of cards in hand, with a new card that is randomly drawn by the rand() function inserted
-  Cards *hit = new Cards; //new node for the card hit
-  srand(time(NULL));
-  hit->cardval=rand()%13 + 1; //randomly hit a card
-  switch (hit->cardval){ //assign value of card according to its face, A is assigned as 1, 10/J/Q/K as 10
-    case 1:
-      hit->cardface="A";
-      break;
-    case 2:
-      hit->cardface="2";
-      break;
-    case 3:
-      hit->cardface="3";
-      break;
-    case 4:
-      hit->cardface="4";
-      break;
-    case 5:
-      hit->cardface="5";
-      break;
-    case 6:
-      hit->cardface="6";
-      break;
-    case 7:
-      hit->cardface="7";
-      break;  
-    case 8:
-      hit->cardface="8";
-      break;
-    case 9:
-      hit->cardface="9";
-      break;  
-    case 10:
-      hit->cardface="10";
-      break;
-    case 11:
-      hit->cardface="J";
-      hit->cardval=10;
-      break;
-    case 12:
-      hit->cardface="Q";
-      hit->cardval=10;
-      break;
-    case 13:
-      hit->cardface="K";
-      hit->cardval=10;
-      break;  
-  }
-  hit->next=head;
-  head=hit; //insert the node to the linked list
-  return head;
+
+void dealcard(vector<card> &hand) {
+    card *hit_card = new card;
+    int value;
+    char number;
+    char suit;
+    int random_number;
+    srand(time(NULL));
+    random_number = (rand()%13) + 1;
+    map<int, char> numbers = {{1, 'A'}, {2, '2'}, {3, '3'}, {4, '4'}, {5, '5'},
+    {6, '6'}, {7, '7'}, {8, '8'}, {9, '9'}, {10, '10'}, {11, 'J'}, {12, 'Q'}, {13, 'K'}};
+    number = numbers[random_number];
+    map<char, int> number_to_value = {{'A', 1}, {'2', 2}, {'3', 3}, {'4', 4}, {'5', 5},
+    {'6', 6}, {'7', 7}, {'8', 8}, {'9', 9}, {'10', 10}, {'J', 10}, {'Q', 10}, {'K', 10}};
+    value = number_to_value[number];
+    random_number = (rand()%4) + 1;
+    map<int, char> suits = {{1, 'H'}, {2, 'S'}, {3, 'C'}, {4, 'D'}};
+    suit = suits[random_number];
+    hit_card->initialise(value, number, suit);
+    hand.push_back(*hit_card);
 }
+
 
