@@ -2,7 +2,7 @@
 #include<iostream>
 #include<RoundStat.h>
 using namespace std;
-int SaveWLstat(vector<RoundStat> WLrec){
+int SaveWLstat(vector<RoundStat> WLrec){ //function that saves the rounds statistics to file
   char filename[]="WLstat.txt";
   ofstream fout;
   fout.open("WLstat.txt");
