@@ -1,6 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <chrono>
+#include <thread>
 #include "Cards.h"
 #include "RoundStat.h"
 #include "CardValSum.h"
@@ -23,6 +25,7 @@ int PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
     cin >> bet;
   }
   playerhead=DealCard(playerhead);
+  std::this_thread::sleep_for(500ms);
   playerhead=DealCard(playerhead);
   cout << "Your hand: ";
   DisplayHand(playerhead);
@@ -70,6 +73,7 @@ int PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
     cout << "House hand: ";
     DisplayHand(househead);
     cout << "Current hand value: " << CardValSum(househead) << endl;
+    std::this_thread::sleep_for(500ms);
   }
   if (CardValSum(househead)>21){
     cout << "House busted! You win this round!" << endl;
