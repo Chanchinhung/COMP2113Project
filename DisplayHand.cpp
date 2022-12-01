@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "Card.h"
+#include "DisplayHand.h"
 using namespace std;
 
 void displaycards(vector<card> &hand) { //function displaying the card faces of a hand
@@ -21,12 +22,17 @@ bool has_ace(vector<card> &hand) {
     return false;
 }
 
-void displaytotalvalue(vector<card> &hand) {
-    int total;
+int total_value(vector<card> &hand) {
+    int total = 0;
     vector<card>::iterator itr;
     for (itr=hand.begin(); itr!=hand.end(); itr++) {
         total += itr->get_value();
     }
+    return total;
+}
+
+void displaytotalvalue(vector<card> &hand) {
+    int total = total_value(hand);
     if (total>21) {
         cout << "Bust (" << total << ")";
     }
@@ -43,3 +49,14 @@ void displaytotalvalue(vector<card> &hand) {
     }
 }
 
+bool bust(vector<card> &hand) {
+    int total = 0;
+    vector<card>::iterator itr;
+    for (itr=hand.begin(); itr!=hand.end(); itr++) {
+        total += itr->get_value();
+    }
+    if (total>21) {
+        return true;
+    }
+    return false;
+}

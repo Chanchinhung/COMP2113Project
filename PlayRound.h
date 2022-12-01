@@ -3,9 +3,9 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
-#include "Cards.h"
+#include "Card.h"
 #include "RoundStat.h"
 using namespace std;
 
-int PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec);
+void PlayRound (int, int, vector<RoundStat>);
 #endif

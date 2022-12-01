@@ -3,13 +3,14 @@
 #include <vector>
 #include <chrono>
 #include <thread>
+#include "Card.h"
 #include "RoundStat.h"
 #include "CardValSum.h"
 #include "DealCard.h"
 #include "DisplayHand.h"
 #include "DetermineWinner.h"
 #include "PlayRound.h"
-#include "Card.h"
+
 using namespace std;
 
 void start_round(int &playermoney, int &housemoney) {
@@ -43,7 +44,24 @@ void player_draw_display() {
     cout << "=====================" << endl;
 }
 
-int PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
+void house_draw_display() {
+    cout << "==========================" << endl;
+    cout << "The house has drawn a card" << endl;
+    cout << "==========================" << endl;
+}
+
+void player_action(char &choice) {
+    cout << "Hit (h) | Stand (s) | Double Down (d) | Surrender (x) | Options (o)" << endl;
+    cout << "Your choice: ";
+    cin >> choice;
+	while (!((choice=='h') || (choice=='s') || (choice=='d') || (choice=='x') || (choice=='o'))) {
+		cout << "Invalid input, try again." << endl;
+		cout << "Your choice: ";
+		cin >> choice;
+	}
+}
+
+void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
     vector<card> player_cards;
     vector<card> house_cards;
     int bet;
@@ -59,86 +77,104 @@ int PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
     player_draw_display();
     cout << "Your hand:" << endl;
     displaycards(player_cards);
-    cout << "Current hand value: " << displaytotalvalue(player_cards) << endl;
-    cout << "What will you do? (Please enter the corresponding character)" <<endl;
-    cout << "H: Hit S:Stand D: Double Down X:Surrender" <<endl;
-    while ((choice!='S')&&(choice!='X')&&(choice!='D')&&(CardValSum(playerhead)<21)){
-    cout << "Your choice: ";
-    cin >> choice;
-    if (choice=='X'){
-      playermoney-=bet/2;
-      housemoney+=bet/2;
-      temp.WL='L';
-      temp.moneywon=-bet/2;
-      WLrec.push_back(temp);
-      cout << "You lose this round." << endl;
-      return 0;
+    cout << "Current hand value: " << endl;
+    displaytotalvalue(player_cards);
+
+    while (!(bust(player_cards))) {
+        player_action(choice);
+        if (choice=='X') {
+            playermoney -= bet/2;
+            housemoney += bet/2;
+            temp.WL = 'L';
+            temp.moneywon =- bet/2;
+            WLrec.push_back(temp);
+            cout << "========================" << endl;
+            cout << "You surrender this round" << endl;
+            cout << "========================" << endl;
+            cout << "You lose " << bet/2;
+            return;
+        }
+        else if (choice=='D') {
+            bet *= 2;
+            dealcard(player_cards);
+            player_draw_display();
+            cout << "Your hand:" << endl;
+            displaycards(player_cards);
+            cout << "Current hand value: " << endl;
+            displaytotalvalue(player_cards);
+        }
+        else if (choice=='H') {
+            dealcard(player_cards);
+            player_draw_display();
+            cout << "Your hand:" << endl;
+            displaycards(player_cards);
+            cout << "Current hand value: " << endl;
+            displaytotalvalue(player_cards);
+        }
     }
-    if (choice=='D'){
-      bet*=2;
-      playerhead=DealCard(playerhead);
-      cout << "Your hand: ";
-      DisplayHand(playerhead);
-      cout << "Current hand value: " << CardValSum(playerhead) << endl;
+    if (bust(player_cards)) {
+        cout << "=========================" << endl;
+        cout << "Bust! You lose this round" << endl;
+        cout << "=========================" << endl;
+        playermoney -= bet;
+        housemoney += bet;
+        temp.WL = 'L';
+        temp.moneywon =- bet;
+        WLrec.push_back(temp);
+        return;
     }
-    if (choice=='H'){
-      playerhead=DealCard(playerhead);
-      cout << "Your hand: ";
-      DisplayHand(playerhead);
-      cout << "Current hand value: " << CardValSum(playerhead) << endl;
+    cout << "House's turn!" << endl; 
+    while (total_value(house_cards)){
+        dealcard(house_cards);
+        house_draw_display();
+        cout << "House's hand:" << endl;
+        displaycards(house_cards);
+        cout << "House's hand value: " << endl;
+        displaytotalvalue(house_cards);
+        std::this_thread::sleep_for(500ms);
     }
-  }
-  if (CardValSum(playerhead)>21){
-    cout << "Busted! You lose this round" << endl;
-    playermoney-=bet;
-    housemoney+=bet;
-    temp.WL='L';
-    temp.moneywon=-bet;
-    WLrec.push_back(temp);
-    return 0;
-  }
-  cout << "House's turn!" << endl; 
-  while (CardValSum(househead)<17){
-    househead=DealCard(househead);
-    cout << "House hand: ";
-    DisplayHand(househead);
-    cout << "Current hand value: " << CardValSum(househead) << endl;
-    std::this_thread::sleep_for(500ms);
-  }
-  if (CardValSum(househead)>21){
-    cout << "House busted! You win this round!" << endl;
-    playermoney+=bet;
-    housemoney-=bet;
-    temp.WL='W';
-    temp.moneywon=bet;
-    WLrec.push_back(temp);
-    return 0;
-  }
-  switch (DetermineWinner(playerhead, househead)){
-    case 3:
-    cout << "You hand is as good as house's. You draw this round." << endl;
-    temp.WL='D';
-    temp.moneywon=0;
-    WLrec.push_back(temp);
-    return 0;
-    case 1:
-    cout << "House has better hand. You lost this round." << endl;
-    playermoney-=bet;
-    housemoney+=bet;
-    temp.WL='L';
-    temp.moneywon=-bet;
-    WLrec.push_back(temp);
-    return 0;
-    case 2:
-    cout << "You have better hand. You win this round!" << endl;
-    playermoney+=bet;
-    housemoney-=bet;
-    temp.WL='W';
-    temp.moneywon=bet;
-    WLrec.push_back(temp);
-    return 0;
-  }
-  return 0;
+    if (bust(house_cards)){
+        cout << "======================================" << endl;
+        cout << "The house has bust! You win this round" << endl;
+        cout << "======================================" << endl;
+        playermoney += bet;
+        housemoney -= bet;
+        temp.WL = 'W';
+        temp.moneywon = bet;
+        WLrec.push_back(temp);
+        return;
+    }
+    switch (DetermineWinner(player_cards, house_cards)){
+        case 3:
+            cout << "=========================================" << endl;
+            cout << "Your hands are equal! You draw this round" << endl;
+            cout << "=========================================" << endl;
+            temp.WL='D';
+            temp.moneywon=0;
+            WLrec.push_back(temp);
+            return;
+        case 1:
+            cout << "===============================================" << endl;
+            cout << "The house's hand is better! You lose this round" << endl;
+            cout << "===============================================" << endl;
+            playermoney -= bet;
+            housemoney += bet;
+            temp.WL = 'L';
+            temp.moneywon =- bet;
+            WLrec.push_back(temp);
+            return;
+        case 2:
+            cout << "=======================================" << endl;
+            cout << "Your hand is better! You win this round" << endl;
+            cout << "=======================================" << endl;
+            playermoney += bet;
+            housemoney -= bet;
+            temp.WL = 'W';
+            temp.moneywon = bet;
+            WLrec.push_back(temp);
+            return;
+    }
+    return;
 }
 
 
