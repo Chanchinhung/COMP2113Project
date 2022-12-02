@@ -7,7 +7,7 @@ UID: 3035940998
 Name: Robert Miles Ryan Reese  
 UID: 3035743584  
 Name: Arnold  
-UID:  
+UID:  3035569158
 Name: Zay  
 UID:  
 
@@ -52,9 +52,7 @@ Detail of rules:
 	Ace - 1 or 11 (according to the player's choice)  
 	Two - 2  
 	Three - 3  
-	.  
-	.  
-	.  
+	...  
 	Nine - 9  
 	Ten - 10  
 	Face cards (Jack/Queen/King) - 10  
