@@ -10,6 +10,6 @@
 
 using namespace std;
 bool samecard( vector<card> & );
-void split(int &, int &, int &, bool &, bool &, vector<RoundStat> &, vector<card> &, vector<card> &);
+void split(int &, int &, int &, bool &, vector<RoundStat> &, vector<card> &, vector<card> &);
 
 #endif
