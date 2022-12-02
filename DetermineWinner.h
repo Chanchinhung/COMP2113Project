@@ -1,6 +1,7 @@
-#ifndef DetermineWinner_H
-#define DetermineWinner_H
+#include <vector>
 #include "Card.h"
 #include "CardValSum.h"
-int DetermineWinner(vector<card>, vector <card>);
+#ifndef DetermineWinner_H
+#define DetermineWinner_H
+int DetermineWinner(vector<card> &, vector <card> &);
 #endif

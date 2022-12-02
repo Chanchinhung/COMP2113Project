@@ -5,7 +5,6 @@
 #include <thread>
 #include "Card.h"
 #include "RoundStat.h"
-#include "CardValSum.h"
 #include "DealCard.h"
 #include "DisplayHand.h"
 #include "DetermineWinner.h"
@@ -177,11 +176,6 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
     return;
 }
 
-int main() {
-    vector<RoundStat> test;
-    PlayRound(1000, 1000, test);
-    return 0;
-}
 
 
 

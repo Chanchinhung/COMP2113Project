@@ -1,4 +1,4 @@
-#ifndef Card_H //header file for data structure storing cards
+#ifndef Card_H //header file for card class
 #define Card_H
 class card {
     public:
