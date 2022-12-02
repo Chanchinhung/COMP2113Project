@@ -60,8 +60,13 @@ void player_action(char &choice) {
 	}
 }
 
-void PlayProcess (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
-	//This PlayProcess function is the 
+void PlayProcess (int &playermoney, int &housemoney, int &bet, vector<RoundStat> &WLrec, vector<card> &player_cards, vector<card> &house_cards){
+	//This PlayProcess function is to handle the playing process in a round.
+	
+	//declare local variables
+	char choice;
+    	RoundStat temp;
+	
 	player_action(choice);
         if (choice=='x') {
             playermoney -= bet/2;
@@ -160,8 +165,6 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
     vector<card> player_cards;
     vector<card> house_cards;
     int bet;
-    char choice;
-    RoundStat temp;
     start_round(playermoney, housemoney);
     enter_bet(bet, playermoney);
     for (int i=0; i<2; i++) {
@@ -173,10 +176,27 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
         displaytotalvalue(player_cards);
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
-    //do {
-    void PlayProcess (playermoney, housemoney, WLrec); //I just separated the PlayRound function to PlayRound and PlayProcess. 
-	//This is because I need to reuse the PlayProcess function in case the player want to split his cards (Which means he need to play 2 times in a round)
-    //}
+    bool issamecard=samecard(player_cards); //To check whether the first 2 cards of the Player are the same
+    if (issamecard==true){
+	    //If yes, the buyer can choose whether to split the 2 Cards.
+	    char splitchoice;
+	    cout<< "Seems you are holding 2 same cards. You can choose to split them apart and play each one like 2 separate hands instead of 1" <<endl;
+	    cout<< "Would you like to split your cards? (Yes:'Y', No:'N') "<<endl;
+	    cout<< "Your choice: ";
+	    cin >> splitchoice;
+	    if (splitchoice=='Y'){
+	        //If the player want to split their cards...
+	        split (playermoney, housemoney, bet, WLrec, player_cards, house_cards);
+	    }
+	    else {
+	        PlayProcess (playermoney, housemoney, bet, WLrec, player_cards, house_cards);
+	    }
+    }
+    else {
+        PlayProcess (playermoney, housemoney, bet, WLrec, player_cards, house_cards); //I just separated the PlayRound function to PlayRound and PlayProcess. 
+	    //This is because I need to reuse the PlayProcess function in case the player want to split his cards (Which means he need to play 2 times in a round)
+    }
+    
     return;
 }
 
