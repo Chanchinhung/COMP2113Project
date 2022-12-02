@@ -187,9 +187,12 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
 	    cin >> splitchoice;
 	    if (splitchoice=='Y'){
 	        //If the player want to split their cards...
+		cout << "You chose to split the 2 Cards"<<endl;
+    		cout << "You now can play the BlackJack game with 2 separate hands. " << endl;
 	        split (playermoney, housemoney, bet, WLrec, player_cards, house_cards);
 	    }
 	    else {
+		cout << "You chose not to split the 2 Cards"<<endl;    
 	        PlayProcess (playermoney, housemoney, bet, WLrec, player_cards, house_cards);
 	    }
     }
