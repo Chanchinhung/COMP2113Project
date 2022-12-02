@@ -9,8 +9,50 @@
 #include "DisplayHand.h"
 #include "DetermineWinner.h"
 #include "PlayRound.h"
+#include "SplitCards.h"
 
 using namespace std;
+
+void split(int&, int&, int&, vector<RoundStat>&, vector<card>&, vector<card>&);
+
+    vector<card> player_cards_1;
+    vector<card> player_cards_2;
+    player_cards_1.pushback(player_cards[0]);
+    player_cards_2.pushback(player_cards[1]);
+
+    //The following is for the player to process their first hand:
+    cout << "You are now playing with your first hand."  << endl;
+    cout << "Your first hand is : ";
+    displaycards(player_cards_1);
+    cout << "Value of your first hand: " << endl;
+    displaytotalvalue(player_cards_1);
+    PlayProcess(playermoney, housemoney, bet, houseprocessed, issamecard, WLrec, player_cards_1, house_cards);
+
+    //The following is for the player to process their second hand:
+    cout << "You are now playing with your second hand." << endl;
+    cout << "Your second hand is : ";
+    displaycards(player_cards_2);
+    cout << "Value of your second hand: " << endl;
+    displaytotalvalue(player_cards_2);
+    PlayProcess(playermoney, housemoney, bet, houseprocessed, issamecard, WLrec, player_cards_1, house_cards);
+
+    return 0;
+}
+
+bool samecard(vector<card>&hand) {
+    //This bool function is to verify where the first 2 cards the player drawn are the same.
+    char number1, number2; //Declare the variables to store the cards' numbers 
+	
+    //The following is to store the number and suits of the first 2 Cards in Player's hand
+    number1 = hand[0].number;
+    number2 = hand[1].number;
+    //End of the variables storing
+	
+    if (number1==number2){
+        return true;
+    }
+    return false;
+}
 
 void start_round(int &playermoney, int &housemoney) {
     cout << "==============" << endl;
@@ -30,7 +72,7 @@ void enter_bet(int &bet, int &playermoney) {
             cin >> bet;
         }
         if (bet>playermoney) {
-            cout << "You cannot be bet $" << bet << ", you only have $" << playermoney << endl;
+            cout << "You cannot be bet $" << bet << ", you only have $" << playermoney << " remaining" << endl;
             cout << "Bet: $";
             cin >> bet;
         }
@@ -176,7 +218,9 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
     vector<card> player_cards;
     vector<card> house_cards;
     int bet;
-    bool houseprocessed=false;
+    bool houseprocessed=false; //To check whether the house has already drawn cards in a round. If yes, the house will not be 
+				//able to drawn extra cards when the player is playing with his/her split hand.
+    bool issamecard=samecard(player_cards); //To check whether the first 2 cards of the Player are the same
     start_round(playermoney, housemoney);
     enter_bet(bet, playermoney);
     for (int i=0; i<2; i++) {
@@ -188,7 +232,6 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
         displaytotalvalue(player_cards);
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
-    bool issamecard=samecard(player_cards); //To check whether the first 2 cards of the Player are the same
     if (issamecard==true){
 	    //If yes, the buyer can choose whether to split the 2 Cards.
 	    char splitchoice;
@@ -198,7 +241,7 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
 	    cout<< "Your choice: ";
 	    cin >> splitchoice;
 	    if (splitchoice=='Y'){
-	        //If the player want to split their cards...
+	        //Choosing yes, the player wants to split their cards...
 		cout << "You chose to split the 2 Cards"<<endl;
     		cout << "You now can play the BlackJack game with 2 separate hands. " << endl;
 	        split (playermoney, housemoney, bet, houseprocessed, WLrec, player_cards, house_cards);
@@ -210,7 +253,7 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
     }
     else {
         PlayProcess (playermoney, housemoney, bet, WLrec, player_cards, house_cards); //I just separated the PlayRound function to PlayRound and PlayProcess. 
-	    //This is because I need to reuse the PlayProcess function in case the player want to split his cards (Which means he need to play 2 times in a round)
+	    //This is because we need to reuse the PlayProcess function in case the player want to split his cards (Which means he need to play 2 times in a round)
     }
     
     return;
