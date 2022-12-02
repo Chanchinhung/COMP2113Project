@@ -9,7 +9,7 @@
 #define SPLITCARDS_H
 
 using namespace std;
-bool samecard( vector<card> & )
-void split(int &, int &, int &, vector<RoundStat> &, vector<card> &, vector<card> &);
+bool samecard( vector<card> & );
+void split(int &, int &, int &, bool &, vector<RoundStat> &, vector<card> &, vector<card> &);
 
 #endif
