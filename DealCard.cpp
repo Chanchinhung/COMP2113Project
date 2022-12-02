@@ -15,10 +15,10 @@ void dealcard(vector<card> &hand) {
     srand(time(NULL));
     random_number = (rand()%13) + 1;
     map<int, char> numbers = {{1, 'A'}, {2, '2'}, {3, '3'}, {4, '4'}, {5, '5'},
-    {6, '6'}, {7, '7'}, {8, '8'}, {9, '9'}, {10, '10'}, {11, 'J'}, {12, 'Q'}, {13, 'K'}};
+    {6, '6'}, {7, '7'}, {8, '8'}, {9, '9'}, {10, 'T'}, {11, 'J'}, {12, 'Q'}, {13, 'K'}};
     number = numbers[random_number];
     map<char, int> number_to_value = {{'A', 1}, {'2', 2}, {'3', 3}, {'4', 4}, {'5', 5},
-    {'6', 6}, {'7', 7}, {'8', 8}, {'9', 9}, {'10', 10}, {'J', 10}, {'Q', 10}, {'K', 10}};
+    {'6', 6}, {'7', 7}, {'8', 8}, {'9', 9}, {'T', 10}, {'J', 10}, {'Q', 10}, {'K', 10}};
     value = number_to_value[number];
     random_number = (rand()%4) + 1;
     map<int, char> suits = {{1, 'H'}, {2, 'S'}, {3, 'C'}, {4, 'D'}};

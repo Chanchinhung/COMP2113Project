@@ -30,7 +30,7 @@ void enter_bet(int &bet, int &playermoney) {
             cin >> bet;
         }
         if (bet>playermoney) {
-            cout << "You cannot be bet " << bet << ", you only have " << playermoney << endl;
+            cout << "You cannot be bet $" << bet << ", you only have $" << playermoney << endl;
             cout << "Bet: $";
             cin >> bet;
         }
@@ -68,20 +68,18 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
     RoundStat temp;
     start_round(playermoney, housemoney);
     enter_bet(bet, playermoney);
-    
-    dealcard(player_cards);
-    player_draw_display();
-    std::this_thread::sleep_for(500ms);
-    dealcard(player_cards);
-    player_draw_display();
-    cout << "Your hand:" << endl;
-    displaycards(player_cards);
-    cout << "Current hand value: " << endl;
-    displaytotalvalue(player_cards);
-
-    while (!(bust(player_cards))) {
+    for (int i=0; i<2; i++) {
+        dealcard(player_cards);
+        player_draw_display();
+        cout << "Your hand:" << endl;
+        displaycards(player_cards);
+        cout << "Current hand value: " << endl;
+        displaytotalvalue(player_cards);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+    do {
         player_action(choice);
-        if (choice=='X') {
+        if (choice=='x') {
             playermoney -= bet/2;
             housemoney += bet/2;
             temp.WL = 'L';
@@ -93,7 +91,7 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
             cout << "You lose " << bet/2;
             return;
         }
-        else if (choice=='D') {
+        else if (choice=='d') {
             bet *= 2;
             dealcard(player_cards);
             player_draw_display();
@@ -102,7 +100,7 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
             cout << "Current hand value: " << endl;
             displaytotalvalue(player_cards);
         }
-        else if (choice=='H') {
+        else if (choice=='h') {
             dealcard(player_cards);
             player_draw_display();
             cout << "Your hand:" << endl;
@@ -110,7 +108,7 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
             cout << "Current hand value: " << endl;
             displaytotalvalue(player_cards);
         }
-    }
+    } while (!((bust(player_cards) || choice=='s')));
     if (bust(player_cards)) {
         cout << "=========================" << endl;
         cout << "Bust! You lose this round" << endl;
@@ -123,14 +121,14 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
         return;
     }
     cout << "House's turn!" << endl; 
-    while (total_value(house_cards)){
+    while (total_value(house_cards)<17){
         dealcard(house_cards);
         house_draw_display();
         cout << "House's hand:" << endl;
         displaycards(house_cards);
         cout << "House's hand value: " << endl;
         displaytotalvalue(house_cards);
-        std::this_thread::sleep_for(500ms);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     if (bust(house_cards)){
         cout << "======================================" << endl;

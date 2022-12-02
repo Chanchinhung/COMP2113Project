@@ -34,18 +34,18 @@ int total_value(vector<card> &hand) {
 void displaytotalvalue(vector<card> &hand) {
     int total = total_value(hand);
     if (total>21) {
-        cout << "Bust (" << total << ")";
+        cout << "Bust (" << total << ")" << endl;
     }
     else if (has_ace(hand)) {
         if ((total+10) > 21) {
-            cout << total;
+            cout << total << endl;
         }
         else {
-            cout << total << " or " << total+10;
+            cout << total << " or " << total+10 << endl;
         }
     }
     else {
-        cout << total;
+        cout << total << endl;
     }
 }
 
