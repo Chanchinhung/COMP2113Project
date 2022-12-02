@@ -1,8 +1,8 @@
 //DealCard.h
-#ifndef DealCard_H
-#define DealCard_H
-#include "Cards.h"
-#include <cstdlib>
-#include <ctime>
-Cards* DealCard(Cards *head);
+#include "Card.h"
+#include <vector>
+#ifndef DEALCARD_H
+#define DEALCARD_H
+using namespace std;
+void dealcard(vector<card> &);
 #endif

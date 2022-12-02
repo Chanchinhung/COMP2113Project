@@ -27,3 +27,11 @@ void card::display() {
     cout << number << " of " << s;
 }
 
+bool card::is_ace() {
+    return (number == 'A');
+}
+
+int card::get_value() {
+    return value;
+}
+

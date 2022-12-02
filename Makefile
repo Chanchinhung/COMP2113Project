@@ -1,18 +1,22 @@
-CardValSum.o: CardValSum.cpp CardValSum.h Cards.h
-	g++ -c CardValSum.cpp
-DealCard.o: DealCard.cpp DealCard.h Cards.h
-	g++ -c DealCard.cpp
-DisplayHand.o: DisplayHand.cpp DisplayHand.h Cards.h
-	g++ -c DisplayHand.cpp
-DetermineWinner.o: DetermineWinner.cpp DetermineWinner.h CardValSum.h Cards.h
-	g++ -c DetermineWinner.cpp
-PlayRound.o: PlayRound.cpp PlayRound.h RoundStat.h Cards.h
-	g++ -c PlayRound.cpp
-playroundtest.o: playroundtest.cpp CardValSum.h DealCard.h DisplayHand.h PlayRound.h Cards.h RoundStat.h
-	g++ -c playroundtest.cpp
-main: playroundtest.o CardValSum.o DealCard.o DisplayHand.o PlayRound.o
-	g++ playroundtest.o CardValSum.o DealCard.o DisplayHand.o DetermineWinner.o PlayRound.o -o main
+FLAGS = -pedantic-errors -std=c++11
+
+Card.o: Card.cpp Card.h
+	g++ $(FLAGS) -c $<
+DealCard.o: DealCard.cpp DealCard.h Card.h
+	g++ $(FLAGS) -c $<
+DetermineWinner.o: DetermineWinner.cpp DetermineWinner.h DisplayHand.h Card.h
+	g++ $(FLAGS) -c $<
+DisplayHand.o: DisplayHand.cpp DisplayHand.h Card.h
+	g++ $(FLAGS) -c $<
+PlayRound.o: PlayRound.cpp DealCard.h DisplayHand.h PlayRound.h Card.h RoundStat.h DetermineWinner.h
+	g++ $(FLAGS) -c $<
+playroundtest.o: playroundtest.cpp PlayRound.h Card.h RoundStat.h
+	g++ $(FLAGS) -c $<
+playroundtest: playroundtest.o DetermineWinner.o DisplayHand.o DealCard.o Card.o DetermineWinner.o PlayRound.o
+	g++ $(FLAGS) $^ -o playroundtest
+main: playroundtest.o DealCard.o DisplayHand.o PlayRound.o
+	g++ $(FLAGS) $^ -o main
 clean:
-	rm -f main playroundtest.o CardValSum.o DealCard.o DisplayHand.o DetermineWinner.o PlayRound.o
+	rm -f *.o
 .PHONY: clean
 
