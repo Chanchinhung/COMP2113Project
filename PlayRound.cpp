@@ -60,25 +60,9 @@ void player_action(char &choice) {
 	}
 }
 
-void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
-    vector<card> player_cards;
-    vector<card> house_cards;
-    int bet;
-    char choice;
-    RoundStat temp;
-    start_round(playermoney, housemoney);
-    enter_bet(bet, playermoney);
-    for (int i=0; i<2; i++) {
-        dealcard(player_cards);
-        player_draw_display();
-        cout << "Your hand:" << endl;
-        displaycards(player_cards);
-        cout << "Current hand value: " << endl;
-        displaytotalvalue(player_cards);
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
-    do {
-        player_action(choice);
+void PlayProcess (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
+	//This PlayProcess function is the 
+	player_action(choice);
         if (choice=='x') {
             playermoney -= bet/2;
             housemoney += bet/2;
@@ -170,7 +154,29 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
             temp.moneywon = bet;
             WLrec.push_back(temp);
             return;
+}
+
+void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
+    vector<card> player_cards;
+    vector<card> house_cards;
+    int bet;
+    char choice;
+    RoundStat temp;
+    start_round(playermoney, housemoney);
+    enter_bet(bet, playermoney);
+    for (int i=0; i<2; i++) {
+        dealcard(player_cards);
+        player_draw_display();
+        cout << "Your hand:" << endl;
+        displaycards(player_cards);
+        cout << "Current hand value: " << endl;
+        displaytotalvalue(player_cards);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
+    //do {
+    void PlayProcess (playermoney, housemoney, WLrec); //I just separated the PlayRound function to PlayRound and PlayProcess. 
+	//This is because I need to reuse the PlayProcess function in case the player want to split his cards (Which means he need to play 2 times in a round)
+    //}
     return;
 }
 
