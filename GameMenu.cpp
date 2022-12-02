@@ -1,6 +1,8 @@
 #include <iostream>
+#include <vector>
 #include "GameMenu.h"
 #include "SaveLoadGame.h"
+#include "RoundStat.h"
 using namespace std;
 
 //start screen
@@ -19,7 +21,7 @@ void display_gm1() {
 }
 
 //start menu
-void game_menu_1() { 
+void game_menu_1(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) { 
 	char choice;
 	display_gm1();
 	cin >> choice;
@@ -55,7 +57,7 @@ void display_gm2() {
 }
 
 //pause menu
-void game_menu_2() {
+void game_menu_2(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
 	char choice;
 	display_gm2();
 	cin >> choice;
