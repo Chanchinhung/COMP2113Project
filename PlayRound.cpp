@@ -60,7 +60,7 @@ void player_action(char &choice) {
 	}
 }
 
-void PlayProcess (int &playermoney, int &housemoney, int &bet, vector<RoundStat> &WLrec, vector<card> &player_cards, vector<card> &house_cards){
+void PlayProcess (int &playermoney, int &housemoney, int &bet, bool &houseprocessed, vector<RoundStat> &WLrec, vector<card> &player_cards, vector<card> &house_cards){
 	//This PlayProcess function is to handle the playing process in a round.
 	
 	//declare local variables
@@ -97,8 +97,8 @@ void PlayProcess (int &playermoney, int &housemoney, int &bet, vector<RoundStat>
             cout << "Current hand value: " << endl;
             displaytotalvalue(player_cards);
         }
-    } while (!((bust(player_cards) || choice=='s')));
-    if (bust(player_cards)) {
+    	} while (!((bust(player_cards) || choice=='s')));
+    	if (bust(player_cards)) {
         cout << "=========================" << endl;
         cout << "Bust! You lose this round" << endl;
         cout << "=========================" << endl;
@@ -108,29 +108,40 @@ void PlayProcess (int &playermoney, int &housemoney, int &bet, vector<RoundStat>
         temp.moneywon =- bet;
         WLrec.push_back(temp);
         return;
-    }
-    cout << "House's turn!" << endl; 
-    while (total_value(house_cards)<17){
-        dealcard(house_cards);
-        house_draw_display();
-        cout << "House's hand:" << endl;
-        displaycards(house_cards);
-        cout << "House's hand value: " << endl;
-        displaytotalvalue(house_cards);
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
-    if (bust(house_cards)){
-        cout << "======================================" << endl;
-        cout << "The house has bust! You win this round" << endl;
-        cout << "======================================" << endl;
-        playermoney += bet;
-        housemoney -= bet;
-        temp.WL = 'W';
-        temp.moneywon = bet;
-        WLrec.push_back(temp);
-        return;
-    }
-    switch (DetermineWinner(player_cards, house_cards)){
+    	}
+	if (houseprocessed==false){
+		cout << "House's turn!" << endl; 
+    		while (total_value(house_cards)<17){
+        	dealcard(house_cards);
+        	house_draw_display();
+        	cout << "House's hand:" << endl;
+        	displaycards(house_cards);
+        	cout << "House's hand value: " << endl;
+        	displaytotalvalue(house_cards);
+        	std::this_thread::sleep_for(std::chrono::seconds(1));
+		}
+		houseprocessed==true; //To ensure that the house will not draw cards for one more time when the player choose to split.
+    	else{ 
+		//The commands in else{} is to display the house's cards without drawing the cards again. 
+		cout << "House's hand:" << endl;
+		displaycards(house_cards);
+		cout << "House's hand value: " << endl;
+        	displaytotalvalue(house_cards);
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+	}
+    	}
+    	if (bust(house_cards)){
+        	cout << "======================================" << endl;
+        	cout << "The house has bust! You win this round" << endl;
+        	cout << "======================================" << endl;
+        	playermoney += bet;
+        	housemoney -= bet;
+        	temp.WL = 'W';
+        	temp.moneywon = bet;
+        	WLrec.push_back(temp);
+        	return;
+    	}
+    	switch (DetermineWinner(player_cards, house_cards)){
         case 3:
             cout << "=========================================" << endl;
             cout << "Your hands are equal! You draw this round" << endl;
@@ -165,6 +176,7 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
     vector<card> player_cards;
     vector<card> house_cards;
     int bet;
+    bool houseprocessed=false;
     start_round(playermoney, housemoney);
     enter_bet(bet, playermoney);
     for (int i=0; i<2; i++) {
@@ -189,11 +201,11 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
 	        //If the player want to split their cards...
 		cout << "You chose to split the 2 Cards"<<endl;
     		cout << "You now can play the BlackJack game with 2 separate hands. " << endl;
-	        split (playermoney, housemoney, bet, WLrec, player_cards, house_cards);
+	        split (playermoney, housemoney, bet, houseprocessed, WLrec, player_cards, house_cards);
 	    }
 	    else {
 		cout << "You chose not to split the 2 Cards"<<endl;    
-	        PlayProcess (playermoney, housemoney, bet, WLrec, player_cards, house_cards);
+	        PlayProcess (playermoney, housemoney, bet, houseprocessed, WLrec, player_cards, house_cards);
 	    }
     }
     else {
