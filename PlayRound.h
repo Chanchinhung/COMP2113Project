@@ -11,7 +11,7 @@ void start_round(int &, int &);
 void enter_bet(int &, int &);
 void player_draw_display();
 void house_draw_display();
-void player_action(char &, bool &);
-void PlayProcess (int &, int &, int &, bool &, bool &, vector<RoundStat> &, vector<card> &, vector<card> &);
+void player_action(char &);
+void PlayProcess (int &, int &, int &, bool &, vector<RoundStat> &, vector<card> &, vector<card> &);
 void PlayRound (int &, int &, vector<RoundStat> &);
 #endif
