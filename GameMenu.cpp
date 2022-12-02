@@ -35,7 +35,7 @@ void game_menu_1() {
 	else if (choice=='l') {
 		//implement load game
 		LoadGame(playermoney,housemoney,WLrec);
-		exit(1);
+		// exit(1);
 	}
 	else if (choice=='q') {
         //implement quit game
@@ -75,7 +75,7 @@ void game_menu_2() {
 	else if (choice=='s') {
 		//implement save game
 		SaveGame(playermoney,housemoney,WLrec);
-		exit(1);
+		// exit(1);
 	}
 	else if (choice=='q') {
 		//implement quit game
