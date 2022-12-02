@@ -11,5 +11,6 @@ void enter_bet(int &, int &);
 void player_draw_display();
 void house_draw_display();
 void player_action(char &);
+void PlayProcess (int &, int &, vector<RoundStat> &);
 void PlayRound (int &, int &, vector<RoundStat> &);
 #endif
