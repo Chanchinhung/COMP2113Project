@@ -5,4 +5,5 @@
 #define DEALCARD_H
 using namespace std;
 void dealcard(vector<card> &);
+void random_time();
 #endif

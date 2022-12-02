@@ -130,6 +130,7 @@ void PlayProcess (int &playermoney, int &housemoney, int &bet, bool &houseproces
             displaycards(player_cards);
             cout << "Current hand value: " << endl;
             displaytotalvalue(player_cards);
+            break;
         }
         else if (choice=='h') {
             dealcard(player_cards);
