@@ -28,11 +28,21 @@ int total_value(vector<card> &hand) {
     for (itr=hand.begin(); itr!=hand.end(); itr++) {
         total += itr->get_value();
     }
+    if (has_ace(hand)) {
+        if ((total+10)<=21) {
+            return (total+10);
+        }
+    }
     return total;
 }
 
+
 void displaytotalvalue(vector<card> &hand) {
-    int total = total_value(hand);
+    int total = 0;
+    vector<card>::iterator itr;
+    for (itr=hand.begin(); itr!=hand.end(); itr++) {
+        total += itr->get_value();
+    }
     if (total>21) {
         cout << "Bust (" << total << ")" << endl;
     }

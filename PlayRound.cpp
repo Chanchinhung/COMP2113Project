@@ -99,6 +99,7 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
             displaycards(player_cards);
             cout << "Current hand value: " << endl;
             displaytotalvalue(player_cards);
+            break;
         }
         else if (choice=='h') {
             dealcard(player_cards);

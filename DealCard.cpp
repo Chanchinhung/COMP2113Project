@@ -6,13 +6,17 @@
 #include "DealCard.h"
 using namespace std;
 
+void random_time() {
+    srand(time(NULL));
+}
+
 void dealcard(vector<card> &hand) {
     card *hit_card = new card;
     int value;
     char number;
     char suit;
     int random_number;
-    srand(time(NULL));
+    random_time();
     random_number = (rand()%13) + 1;
     map<int, char> numbers = {{1, 'A'}, {2, '2'}, {3, '3'}, {4, '4'}, {5, '5'},
     {6, '6'}, {7, '7'}, {8, '8'}, {9, '9'}, {10, 'T'}, {11, 'J'}, {12, 'Q'}, {13, 'K'}};
