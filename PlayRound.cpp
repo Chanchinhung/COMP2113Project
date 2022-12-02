@@ -180,7 +180,8 @@ void PlayRound (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
     if (issamecard==true){
 	    //If yes, the buyer can choose whether to split the 2 Cards.
 	    char splitchoice;
-	    cout<< "Seems you are holding 2 same cards. You can choose to split them apart and play each one like 2 separate hands instead of 1" <<endl;
+	    cout<< "Seems you are holding 2 same cards. You can choose to split them apart and play each one like 2 separate hands instead of 1." <<endl;
+	    cout<< "If you want to split them apart, you will place your original bet with one hand and place an additional bet on the newly created hand."<<endl;
 	    cout<< "Would you like to split your cards? (Yes:'Y', No:'N') "<<endl;
 	    cout<< "Your choice: ";
 	    cin >> splitchoice;
