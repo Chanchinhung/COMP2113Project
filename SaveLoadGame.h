@@ -1,7 +1,12 @@
+#include <vector>
+#include "RoundStat.h"
+
 #ifndef SaveLoadGame_H
 #define SaveLoadGame_H
 
-void LoadGame (int &playermoney, int &housemoney, vector<RoundStat> &WLrec);
-void SaveGame (int playermoney, int housemoney, vector<RoundStat> WLrec);
+using namespace std;
+
+void LoadGame (int &, int &housemoney, vector<RoundStat> &);
+void SaveGame (int, int, vector<RoundStat>);
 
 #endif
