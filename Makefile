@@ -14,7 +14,7 @@ PlayRound.o: PlayRound.cpp DealCard.h DisplayHand.h PlayRound.h Card.h RoundStat
 #	g++ $(FLAGS) -c $<
 #playroundtest: playroundtest.o DetermineWinner.o DisplayHand.o DealCard.o Card.o DetermineWinner.o PlayRound.o
 #	g++ $(FLAGS) $^ -o playroundtest
-GameMenu.o: GameMenu.cpp GameMenu.h RoundStat.h SaveLoadGame.h PlayRound.h
+GameMenu.o: GameMenu.cpp GameMenu.h RoundStat.h SaveLoadGame.h PlayRound.h DisplayWLStat.h
 	g++ $(FLAGS) -c $<
 main.o: main.cpp GameMenu.h RoundStat.h
 	g++ $(FLAGS) -c $<
