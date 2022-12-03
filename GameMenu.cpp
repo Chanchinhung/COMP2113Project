@@ -4,6 +4,7 @@
 #include "SaveLoadGame.h"
 #include "RoundStat.h"
 #include "PlayRound.h"
+#include "DisplayWLStat.h"
 using namespace std;
 
 //start screen
@@ -15,7 +16,9 @@ void display_start() {
 
 void display_gm1() {
 	cout << "Menu:" << endl;
-	cout << "New Game (n) | Load Game (l) | Quit Game (q)" << endl;
+	cout << "New Game (n)" << endl;
+	cout << "Load Game (l)" << endl;
+	cout << "Quit Game (q)" << endl;
 	cout << "Your Choice: ";
 }
 
@@ -30,19 +33,15 @@ void game_menu_1(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
 		cin >> choice;
 	}
 	if (choice=='n') {
-		// implement new game
+		//implement new game
 		playermoney = 1000;
 		housemoney = 1000;
 		WLrec.clear();
 		PlayRound(playermoney, housemoney, WLrec);
-		
-		// Recursion (back to the menu)
 		game_menu_2(playermoney, housemoney, WLrec);
 	}
 	else if (choice=='l') {
 		LoadGame(playermoney,housemoney,WLrec);
-		
-		// Recursion (back to the menu)
 		game_menu_2(playermoney, housemoney, WLrec);
 	}
 	else if (choice=='q') {
@@ -53,9 +52,12 @@ void game_menu_1(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
 
 void display_gm2() {
 	cout << "Options:" << endl;
-	cout << "Continue (c) | New Game (n) | Save game (s) | Quit game (q)" << endl;
+	cout << "Continue (c)" << endl;
+	cout << "New Game (n)" << endl;
+	cout << "Save game (s)" << endl;
+	cout << "Quit game (q)" << endl;
+	cout << "Win/Loss History (h)" << endl;
 	cout << "Your Choice: ";
-
 }
 
 //pause menu
@@ -63,20 +65,18 @@ void game_menu_2(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
 	char choice;
 	display_gm2();
 	cin >> choice;
-	while (!((choice=='c') || (choice=='n') || (choice=='s') || (choice=='q'))) {
+	while (!((choice=='c') || (choice=='n') || (choice=='s') || (choice=='q') || (choice == 'h'))) {
 		cout << "Invalid input, try again." << endl;
 		cout << "Your choice: ";
 		cin >> choice;
 	}
 	if (choice=='c') {
-		// implement continue game
+		//implement continue game
 		PlayRound(playermoney, housemoney, WLrec);
-		
-		// Recursion (back to the menu)
 		game_menu_2(playermoney, housemoney, WLrec);
 	}
 	else if (choice=='n') {
-		// implement new game
+		//implement new game
 		cout << "Starting a new game will reset your money balance. Are you sure? (y/n)" << endl;
 		cout << "Your choice: ";
 		cin >> choice;
@@ -86,19 +86,20 @@ void game_menu_2(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
 			WLrec.clear();
 			PlayRound(playermoney, housemoney, WLrec);
 		}
-		
-		// Recursion (back to the menu)
+
 		game_menu_2(playermoney, housemoney, WLrec);
 	}
 	else if (choice=='s') {
 		SaveGame(playermoney,housemoney,WLrec);
-		
-		// Recursion (back to the menu)
 		game_menu_2(playermoney, housemoney, WLrec);
 	}
 	else if (choice=='q') {
 		display_exit();
-		exit(1);
+		exit(0);
+	}
+	else if (choice == 'h'){
+		DisplayWLStat(WLrec);
+		game_menu_2(playermoney, housemoney, WLrec);
 	}
 }
 
