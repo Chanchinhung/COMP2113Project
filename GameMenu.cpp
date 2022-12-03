@@ -32,15 +32,15 @@ void game_menu_1(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
 	}
 	if (choice=='n') {
 		//implement new game
-		exit(1);
+		//...
+
+		game_menu_2(playermoney, housemoney, WLrec);
 	}
 	else if (choice=='l') {
-		//implement load game
 		LoadGame(playermoney,housemoney,WLrec);
-		// exit(1);
+		game_menu_2(playermoney, housemoney, WLrec);
 	}
 	else if (choice=='q') {
-        //implement quit game
 		display_exit();
 		exit(1);
     }
@@ -68,19 +68,21 @@ void game_menu_2(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
 	}
 	if (choice=='c') {
 		//implement continue game
-		exit(1);
+		//...
+
+		game_menu_2(playermoney, housemoney, WLrec);
 	}
 	else if (choice=='n') {
 		//implement new game
-		exit(1);
+		//...
+
+		game_menu_2(playermoney, housemoney, WLrec);
 	}
 	else if (choice=='s') {
-		//implement save game
 		SaveGame(playermoney,housemoney,WLrec);
-		// exit(1);
+		game_menu_2(playermoney, housemoney, WLrec);
 	}
 	else if (choice=='q') {
-		//implement quit game
 		display_exit();
 		exit(1);
 	}
