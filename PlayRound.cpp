@@ -114,8 +114,8 @@ void PlayProcess(int& playermoney, int& housemoney, int& bet, bool& houseprocess
     RoundStat temp;
         
     while (!((bust(player_cards) || choice == 's'))) {
-    	player_action(choice);
-    	if (choice == 'x') {
+        player_action(choice);
+        if (choice == 'x') {
             playermoney -= (bet+1) / 2;
             housemoney += (bet+1) / 2;
             temp.WL = 'L';
@@ -129,7 +129,7 @@ void PlayProcess(int& playermoney, int& housemoney, int& bet, bool& houseprocess
         }
         else if (choice == 'd') {
             if (playermoney<bet*2)
-              cout << "You don't have enough money left to double down" << endl;
+                cout << "You don't have enough money left to double down" << endl;
             else{
                 bet *= 2;            
                 dealcard(player_cards);
@@ -137,8 +137,8 @@ void PlayProcess(int& playermoney, int& housemoney, int& bet, bool& houseprocess
                 cout << "Your hand:" << endl;
                 displaycards(player_cards);
                 cout << "Current hand value: " << endl;
-            	displaytotalvalue(player_cards);
-            	choice='s';
+                displaytotalvalue(player_cards);
+                choice='s';
             }	
         }
         else if (choice == 'h') {
