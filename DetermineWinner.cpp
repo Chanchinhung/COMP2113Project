@@ -14,7 +14,7 @@ int DetermineWinner(vector<card> &player, vector<card> &house) {
     else if (player_total > house_total) {
         return 2;
     }
-    else if (player_total == house_total) {
+    else{
         return 3;
     }
 }
