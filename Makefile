@@ -20,7 +20,9 @@ main.o: main.cpp GameMenu.h RoundStat.h
 	g++ $(FLAGS) -c $<
 SaveLoadGame.o: SaveLoadGame.cpp RoundStat.h
 	g++ $(FLAGS) -c $<
-main: GameMenu.o main.o SaveLoadGame.o DetermineWinner.o DisplayHand.o DealCard.o Card.o DetermineWinner.o PlayRound.o
+DisplayWLStat.o: DisplayWLStat.cpp DisplayWLStat.h
+	g++ $(FLAGS) -c $<
+main: DisplayWLStat.o GameMenu.o main.o SaveLoadGame.o DetermineWinner.o DisplayHand.o DealCard.o Card.o DetermineWinner.o PlayRound.o
 	g++ $(FLAGS) $^ -o main
 
 clean:
