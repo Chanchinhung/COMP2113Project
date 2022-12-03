@@ -29,6 +29,12 @@ void LoadGame (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){
 	}
 
 	fin.close();
+	
+	// Screen output money balance
+	cout << "Game loaded successfully." <<endl;
+	cout << "Bank Balance:" << endl;
+	cout << "You:    $" << playermoney << endl;
+	cout << "Dealer: $" << housemoney << endl;
 }
 
 // Function to Save the Game (save the player/house money; save the WL stat)
@@ -51,6 +57,9 @@ void SaveGame (int playermoney, int housemoney, vector<RoundStat> WLrec){
 	}
 
 	fout.close();
+	
+	// Screen output
+	cout << "The Game is saved successfully!" << endl;
 }
 
 
