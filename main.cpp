@@ -16,10 +16,12 @@ int main(){
 
 	// display start menu
 	game_menu_1(playermoney, housemoney, WLrec);
+	// Note that the game loop is in GameMenu.cpp
+	
 	// display pause menu
-	game_menu_2(playermoney, housemoney, WLrec);
+	//game_menu_2(playermoney, housemoney, WLrec);
 	
 	//display exit menu
-	display_exit();
+	//display_exit();
 	return 0;
 }
