@@ -21,16 +21,21 @@ void split(int& playermoney, int& housemoney, int& bet, bool& houseprocessed, bo
     player_cards_2.push_back(player_cards[1]);
 
     //The following is for the player to process their first hand:
-    cout << "You are now playing with your first hand." << endl;
-    cout << "Your first hand is : " << endl;
+    cout << "==========" << endl;
+    cout << "First hand" << endl;
+    cout << "==========" << endl;
+    cout << "Your first hand is: " << endl;
     displaycards(player_cards_1);
     cout << "Value of your first hand: " << endl;
     displaytotalvalue(player_cards_1);
     PlayProcess(playermoney, housemoney, bet, houseprocessed, issamecard, WLrec, player_cards_1, house_cards);
 
     //The following is for the player to process their second hand:
-    cout << "You are now playing with your second hand." << endl;
-    cout << "Your second hand is : " << endl;
+    house_cards.clear();
+    cout << "===========" << endl;
+    cout << "Second hand" << endl;
+    cout << "===========" << endl;
+    cout << "Your second hand is: " << endl;
     displaycards(player_cards_2);
     cout << "Value of your second hand: " << endl;
     displaytotalvalue(player_cards_2);
@@ -111,10 +116,10 @@ void PlayProcess(int& playermoney, int& housemoney, int& bet, bool& houseprocess
     while (!((bust(player_cards) || choice == 's'))) {
     	player_action(choice);
     	if (choice == 'x') {
-            playermoney -= bet / 2;
-            housemoney += bet / 2;
+            playermoney -= (bet+1) / 2;
+            housemoney += (bet+1) / 2;
             temp.WL = 'L';
-            temp.moneywon = -bet / 2;
+            temp.moneywon = -(bet+1) / 2;
             WLrec.push_back(temp);
             cout << "========================" << endl;
             cout << "You surrender this round" << endl;
@@ -242,15 +247,19 @@ void PlayRound(int& playermoney, int& housemoney, vector<RoundStat>& WLrec) {
     if (issamecard == true) {
         //If yes, the buyer can choose whether to split the 2 Cards.
         char splitchoice;
-        cout << "Seems you are holding 2 same cards. You can choose to split them apart and play each one like 2 separate hands instead of 1." << endl;
-        cout << "If you want to split them apart, you will place your original bet with one hand and place an additional bet on the newly created hand." << endl;
-        cout << "Would you like to split your cards? (Yes:'Y', No:'N') " << endl;
+        cout << "You have two of the same card." << endl;
+        cout << "Would you like to split your cards? (Yes:'y', No:'n') " << endl;
         cout << "Your choice: ";
         cin >> splitchoice;
-        if (splitchoice == 'Y') {
+        while (!((splitchoice=='y') || (splitchoice=='n'))) {
+            cout << "Invalid input, try again." << endl;
+            cout << "Your choice: ";
+            cin >> splitchoice;
+	}
+        if (splitchoice == 'y') {
             //Choosing yes, the player wants to split their cards...
-            cout << "You chose to split the 2 Cards" << endl;
-            cout << "You now can play the BlackJack game with 2 separate hands. " << endl;
+            cout << "You chose to split your Cards." << endl;
+            cout << "You now can play the BlackJack with 2 separate hands. " << endl;
             split(playermoney, housemoney, bet, houseprocessed, issamecard, WLrec, player_cards, house_cards);
         }
         else {
