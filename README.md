@@ -61,3 +61,38 @@ Detail of rules:
 	In this case, the player immediately wins the round unless the dealer also draws a "Blackjack".  
 	If the player draws two identical cards from their first two cards, they can choose to "split".  
 	In this case, the two cards are split into two separate hands that are simultaneously played by the player.  
+
+<ins>Our program features encompass the following coding requirements:</ins>
+
+1.  Generation of random game sets or events
+	-The cards drawn by the player are randomly assigned.
+	-The cards drawn by the house are randomly assigned.
+
+2.  Data structures for storing game status
+	- //Please write something here if something is missing
+
+3.  Dynamic memory management
+	-In the Black Jack game, we used vectors to store the player’s and the house’s cards. At the beginning of the game, the vectors storing the cards are empty. After the player and the house draw cards in the game, the card’s information will be pushed into the vector. When the program needs to calculate the cards’ value or print the cards for the player, the program will access the vector and finish these tasks. After playing a round, the program will initialise the vectors back to some empty vectors.
+	-When the program is printing out the cards held by the player or the house, the program will use iterators to implement a for-loop to print all the cards held by a player or a buyer.
+	- //Please write something here if something is missing
+
+4.  File input/output
+	- //Please write something here if something is missing
+
+5.  Program codes in multiple files
+	-We have separated our codes into multiple files and made use of the header files and Makefile to make sure the program is running properly. 
+	-main.cpp: Controls the whole logic of the program
+	-loadWLstat.cpp:
+	-SaveWLstat.cpp:
+	-DisplayWLStat.cpp:
+	-SaveLoadGame.cpp:
+	-PlayRound.cpp: To implement the main BlackJack game.
+	-GameMenu.cpp: 
+	-DisplayHand.cpp: To display the cards held by the player or the house.
+	-DetermineWinner.cpp: This determines whether the player or the house won the game in a round.
+	-DealCard.cpp: To assign a card to the player or the dealer randomly.
+	-Card.cpp: 
+
+6.  Proper indentation and naming styles: We used relevant keywords to be the name of the variables or functions, increasing the readability of the code. Also, we used 	Standard C++ programming style to implement our code, to ensure that our indentation is proper.
+
+7.  In-code documentation: We wrote comments on each function to show how the function works and what is its intended input/output. We also wrote proper comments when it is necessary to explain the logic of a certain part of the function. We believe that this could increase the readability of our program and thus understand our program with ease.
