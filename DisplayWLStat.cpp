@@ -12,7 +12,7 @@ int DisplayWLStat(vector<RoundStat> WLrec){ //function that displays the Win Los
     cout << "No record yet" << endl;
     return 0;
   }
-  cout << "W: Win, L: Lost, D:Draw" << endl; //Indicates the character meaning
+  cout << "W: Win, L: Lost, D: Draw" << endl; //Indicates the character meaning
   cout << "==========================================" << endl;
   cout << setw(5) << "Round" << setw(7) << "Result" << setw(11) << "Amount Won" << endl; //set the column headings
   for (int i=0; i < WLrec.size(); i++){ //display the statistics
@@ -33,10 +33,10 @@ int DisplayWLStat(vector<RoundStat> WLrec){ //function that displays the Win Los
   lostrate = (float) LostCount*100/WLrec.size();
   drawrate = (float) DrawCount*100/WLrec.size();
   cout << "Summary:" << endl;
-  cout << "In a total of " <<  WLrec.size() << " rounds, you won " << WinCount << " rounds, " << " lost" << LostCount << " rounds, " << " drew" << DrawCount << " rounds" << endl; //Display total rounds won/lost/drew
+  cout << "In a total of " <<  WLrec.size() << " rounds, you won " << WinCount << " rounds, lost " << LostCount << " rounds, and drew "  << DrawCount << " rounds." << endl; //Display total rounds won/lost/drew
   cout << fixed << setprecision(2);
-  cout << "Your win rate is " << winrate << "%, lost rate is " << lostrate << "%, draw rate is " << drawrate << "%" << endl; //display win/lose/draw rate
-  cout << "Total amount won is $" << betwon << endl; //Display total amount of money won
+  cout << "Your win rate is " << winrate << "%, loss rate is " << lostrate << "%, and draw rate is " << drawrate << "%" << endl; //display win/lose/draw rate
+  cout << "Total amount won/lost is $" << betwon << endl; //Display total amount of money won
   cout << "==========================================" << endl;
   return 0;
 }

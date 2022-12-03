@@ -77,14 +77,26 @@ void game_menu_2(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
 	}
 	else if (choice=='n') {
 		//implement new game
-		cout << "Starting a new game will reset your money balance. Are you sure? (y/n)" << endl;
+		cout << "Starting a new game will reset money and game history." << endl;
+		cout << "Are you sure you would like to start a new game? (y/n)" << endl;
 		cout << "Your choice: ";
 		cin >> choice;
+		while (!((choice=='y') || (choice=='n'))) {
+			cout << "Invalid input, try again." << endl;
+			cout << "Your choice: ";
+			cin >> choice;
+		}
 		if (choice == 'y'){
+			cout << "========" << endl;
+			cout << "New game" << endl;
+			cout << "========" << endl;
 			playermoney = 1000;
 			housemoney = 1000;
 			WLrec.clear();
 			PlayRound(playermoney, housemoney, WLrec);
+		}
+		else {
+			game_menu_2(playermoney, housemoney, WLrec);
 		}
 
 		game_menu_2(playermoney, housemoney, WLrec);

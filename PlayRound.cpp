@@ -62,8 +62,8 @@ void start_round(int &playermoney, int &housemoney) {
     cout << "==============" << endl;
     cout << "Start of Round" << endl;
     cout << "==============" << endl;
-    cout << "Your money: " << playermoney << endl;
-    cout << "House money: " << housemoney << endl;
+    cout << "Your money: $" << playermoney << endl;
+    cout << "House money: $" << housemoney << endl;
 }
 
 void enter_bet(int &bet, int &playermoney) {
@@ -259,11 +259,11 @@ void PlayRound(int& playermoney, int& housemoney, vector<RoundStat>& WLrec) {
         if (splitchoice == 'y') {
             //Choosing yes, the player wants to split their cards...
             cout << "You chose to split your Cards." << endl;
-            cout << "You now can play the BlackJack with 2 separate hands. " << endl;
+            cout << "You now can play BlackJack with 2 separate hands. " << endl;
             split(playermoney, housemoney, bet, houseprocessed, issamecard, WLrec, player_cards, house_cards);
         }
         else {
-            cout << "You chose not to split the 2 Cards" << endl;
+            cout << "You chose not to split your Cards" << endl;
             PlayProcess(playermoney, housemoney, bet, houseprocessed, issamecard, WLrec, player_cards, house_cards);
         }
     }
@@ -272,7 +272,8 @@ void PlayRound(int& playermoney, int& housemoney, vector<RoundStat>& WLrec) {
 	//I(Sam) just separated the PlayRound function to PlayRound and PlayProcess. 
         //This is because we need to reuse the PlayProcess function in case the player want to split his cards (Which means he need to play 2 times in a round)
     }
-
+    cout << "Your money: $" << playermoney << endl;
+    cout << "House money: $" << housemoney << endl;
     return;
 }
 
