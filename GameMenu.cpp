@@ -15,9 +15,7 @@ void display_start() {
 
 void display_gm1() {
 	cout << "Menu:" << endl;
-	cout << "New Game (n)" << endl;
-	cout << "Load Game (l)" << endl;
-	cout << "Quit Game (q)" << endl;
+	cout << "New Game (n) | Load Game (l) | Quit Game (q)" << endl;
 	cout << "Your Choice: ";
 }
 
@@ -55,10 +53,7 @@ void game_menu_1(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
 
 void display_gm2() {
 	cout << "Options:" << endl;
-	cout << "Continue (c)" << endl;
-	cout << "New Game (n)" << endl;
-	cout << "Save game (s)" << endl;
-	cout << "Quit game (q)" << endl;
+	cout << "Continue (c) | New Game (n) | Save game (s) | Quit game (q)" << endl;
 	cout << "Your Choice: ";
 
 }
