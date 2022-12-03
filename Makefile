@@ -14,8 +14,18 @@ playroundtest.o: playroundtest.cpp PlayRound.h Card.h RoundStat.h
 	g++ $(FLAGS) -c $<
 playroundtest: playroundtest.o DetermineWinner.o DisplayHand.o DealCard.o Card.o DetermineWinner.o PlayRound.o
 	g++ $(FLAGS) $^ -o playroundtest
-main: playroundtest.o DealCard.o DisplayHand.o PlayRound.o
+#main: playroundtest.o DealCard.o DisplayHand.o PlayRound.o
+#	g++ $(FLAGS) $^ -o main
+
+GameMenu.o: GameMenu.cpp GameMenu.h RoundStat.h SaveLoadGame.h
+	g++ $(FLAGS) -c $<
+main.o: main.cpp GameMenu.h RoundStat.h
+	g++ $(FLAGS) -c $<
+SaveLoadGame.o: SaveLoadGame.cpp RoundStat.h
+	g++ $(FLAGS) -c $<
+main: GameMenu.o main.o SaveLoadGame.o
 	g++ $(FLAGS) $^ -o main
+
 clean:
 	rm -f *.o
 .PHONY: clean
