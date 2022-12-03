@@ -35,3 +35,7 @@ int card::get_value() {
     return value;
 }
 
+char card::get_number() {
+    return number;
+}
+

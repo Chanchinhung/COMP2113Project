@@ -6,6 +6,7 @@ class card {
         void display();
         bool is_ace();
         int get_value();
+        char get_number();
     //private:
         int value;
         char number;
