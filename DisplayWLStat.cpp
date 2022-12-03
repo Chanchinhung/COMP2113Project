@@ -33,7 +33,7 @@ int DisplayWLStat(vector<RoundStat> WLrec){ //function that displays the Win Los
   lostrate = (float) LostCount*100/WLrec.size();
   drawrate = (float) DrawCount*100/WLrec.size();
   cout << "Summary:" << endl;
-  cout << "In a total of " <<  WLrec.size() << " rounds, you won " << WinCount << " rounds, " << " lost" << LostCount << " rounds, " << " drew" << DrawCount << " rounds" << endl; //Display total rounds won/lost/drew
+  cout << "In a total of " <<  WLrec.size() << " rounds, you won " << WinCount << " rounds, " << " lost " << LostCount << " rounds, " << " drew " << DrawCount << " rounds" << endl; //Display total rounds won/lost/drew
   cout << fixed << setprecision(2);
   cout << "Your win rate is " << winrate << "%, lost rate is " << lostrate << "%, draw rate is " << drawrate << "%" << endl; //display win/lose/draw rate
   cout << "Total amount won is $" << betwon << endl; //Display total amount of money won
