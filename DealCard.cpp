@@ -10,7 +10,7 @@ void random_time() { //generate a random seed using system time
     srand(time(NULL));
 }
 
-//function that takes a vector of card, return the vector with a new card pushed back
+//function that takes a vector of card by reference, return the same vector with a new card pushed back
 void dealcard(vector<card> &hand) {
     card *hit_card = new card; //a new card, to be pushed to the vector
     int value;
