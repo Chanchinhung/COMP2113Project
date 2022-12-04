@@ -101,13 +101,14 @@ Detail of rules:
 5.  Program codes in multiple files
 	-We have separated our codes into multiple files and made use of the header files and Makefile to make sure the program is running properly. 
 	-main.cpp: Controls the whole logic of the program
-	-loadWLstat.cpp:
-	-SaveWLstat.cpp:
-	-DisplayWLStat.cpp:
-	-SaveLoadGame.cpp:
-	-PlayRound.cpp: To implement the main BlackJack game.
-	-GameMenu.cpp: 
-	-DisplayHand.cpp: To display the cards held by the player or the house.
-	-DetermineWinner.cpp: This determines whether the player or the house won the game in a round.
-	-DealCard.cpp: To assign a card to the player or the dealer randomly.
-	-Card.cpp: 
+	-DisplayWLStat.cpp: Contains functions to display the statistics of rounds played
+	-SaveLoadGame.cpp: Contains functions to save the current game status to text file or load previous game status
+	-PlayRound.cpp: Contains functions to implement the main BlackJack game.
+	-GameMenu.cpp: Contains functions to output the different menus and instructions for playing the game on screen
+	-DisplayHand.cpp: Contains functions to display the cards held by the player or the house.
+	-DetermineWinner.cpp: Contains functions to determines whether the player or the house won the game in a round.
+	-DealCard.cpp: Contains functions to assign a card to the player or the dealer randomly.
+	-Card.cpp: Contains member functions of the self-defined structure 'card' for other functions to use
+
+<ins>Compilation and execution instructions:</ins>
+Within the directory, use command 'make main' to create the executable game file, and use command './main' to launch the game and play
