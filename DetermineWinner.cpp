@@ -15,6 +15,9 @@ int DetermineWinner(vector<card> &player, vector<card> &house) {
     else if (player_total > house_total) { //if player won
         return 2;
     }
+    else if ((player.size()==2) && (house.size()!=2) && (player_total==21)){ //player have blackjack while house don't
+        return 2;
+    }
     else{
         return 3; //if ends in a draw
     }
