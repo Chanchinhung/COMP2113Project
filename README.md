@@ -86,20 +86,20 @@ We have created a text-based version of the popular casino game "Blackjack" writ
 
 2. Data structures for storing game status
    - Two integer variables are used to store the amount of money the player and the house has left.
-   - A self-defined structure 'card' with two char variable storing its face (A,1,2,...,J,Q,K) and suit and one int variable storing the value of the card 
-   - Two vectors (three if player "split" their hand) of the structure 'card' are used to store the hands of house and player
-   - A self-defined structure 'RoundStat' with a char variable to store result of the round and an interger variable to store amount of money won by player in the round
-   - A vector of 'RoundStat' to store the overall statistics of a run
+   - A self-defined 'card' class with 3 private values (value (int), number (char), suit (char)) and 5 public member functions (initialise, display, is_ace, get_value, get_number)
+   - Two vectors (three if player "split" their hand) storing 'card' class objects that are used to represent the hands of the player and the house
+   - A self-defined structure 'RoundStat' with a char variable to store result of the round and an integer variable to store the amount of money won by player in the round
+   - A vector of containing 'RoundStat' structure objects that stores the overall statistics of the current game save
 
 3. Dynamic memory management
-   - In the Black Jack game, we used vectors to store the player’s and the house’s cards. At the beginning of the game, the vectors storing the cards are empty. After the player and the house draw cards in the game, the card’s information will be pushed into the vector. When the program needs to calculate the cards’ value or print the cards for the player, the program will access the vector and finish these tasks. After playing a round, the program will initialise the vectors back to some empty vectors.
-   - When the program is printing out the cards held by the player or the house, the program will use iterators to implement a for-loop to print all the cards held by a player or a buyer.
+   - In the Black Jack game, we used vectors to store the player’s and the house’s cards. At the beginning of the game, the vectors storing the cards are empty. Whenever the player or the house draws a card, a card class object is created in dynamic memory that is pushed to the end of the respective vector. When the program needs to calculate the cards’ value or print the cards for the player, the program will access the vector and finish these tasks. After playing a round, the program will initialise the vectors back to empty vectors.
+   - When the program is printing out the cards held by the player or the house, the program will use iterators to implement a for-each loop to print all the cards held by a player or a buyer.
    - After each round, the information of the round is pushed into the vector storing the information of all rounds played in the run
-   - When the program is printing out the statistics of a run, the program will use iterators to implement a for-loop to print the information of all rounds played.
+   - When the program is printing out the statistics of a run, the program will use iterators to implement a for-each loop to print the information of all rounds played.
 	
 4. File input/output
-   - The player can load a previous game they have saved in a text file, retrieving the money the player and house have left, as well as the statistics of all previous rounds played in that game.
-   - The player can save their current game to be played later, storing the money the player and house have left, as well as the statistics of all previous rounds played in that game in a text file.
+   - The player can load a previous game saved in "game_save.txt", retrieving the money the player and house have left, as well as the statistics of all previous rounds played in that game.
+   - The player can save their current game to be played later in "game_save.txt", storing the money the player and house have left, as well as the statistics of all previous rounds played in that game in a text file.
 
 5. Program codes in multiple files
    - We have separated our codes into multiple files and made use of the header files and Makefile to make sure the program is running properly. 
@@ -114,4 +114,4 @@ We have created a text-based version of the popular casino game "Blackjack" writ
      - Card.cpp: Contains member functions of the self-defined structure 'card' for other functions to use
 
 <ins>Compilation and execution instructions:</ins>
-Within the directory, use command 'make main' to create the executable game file, and use command './main' to launch the game and play
+Within the directory, use command 'make main' to create the executable game file, and use command './main' to launch the game and play. We hope you have fun!
