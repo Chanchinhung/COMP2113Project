@@ -276,8 +276,6 @@ void PlayRound(int& playermoney, int& housemoney, vector<RoundStat>& WLrec) {
     }
     else {
         PlayProcess(playermoney, housemoney, bet, houseprocessed, issamecard, WLrec, player_cards, house_cards); 
-	//I(Sam) just separated the PlayRound function to PlayRound and PlayProcess. 
-        //This is because we need to reuse the PlayProcess function in case the player want to split his cards (Which means he need to play 2 times in a round)
     }
     cout << "Your money: $" << playermoney << endl;
     cout << "House money: $" << housemoney << endl;

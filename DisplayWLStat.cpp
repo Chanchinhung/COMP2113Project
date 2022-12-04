@@ -19,7 +19,7 @@ int DisplayWLStat(vector<RoundStat> WLrec){ //function that displays the Win Los
     cout << setw(5) << "Round" << setw(7) << "Result" << setw(11) << "Amount Won" << endl; //set the column headings
     for (int i=0; i < WLrec.size(); i++){ //display the statistics
         cout << setw(5) << i+1 << setw(7) << WLrec[i].WL << setw(11) << WLrec[i].moneywon <<endl;
-        if (WLrec[i].WL=='W'){
+        if (WLrec[i].WL=='W'){ //count total number of win/lose/draw
             WinCount+=1;
         }
         else{

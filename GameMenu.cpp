@@ -71,7 +71,7 @@ void game_menu_2(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
         PlayRound(playermoney, housemoney, WLrec);
         game_menu_2(playermoney, housemoney, WLrec);
     }
-    else if (choice=='n') {						// new game (reset the balance)
+    else if (choice=='n') {						// new game (reset the balance, clear previous win/lost statistics)
         cout << "Starting a new game will reset money and game history." << endl;
         cout << "Are you sure you would like to start a new game? (y/n)" << endl;
         cout << "Your choice: ";
