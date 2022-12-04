@@ -68,7 +68,15 @@ void game_menu_2(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
         cin >> choice;
     }
     if (choice=='c') {							// continue game
-        PlayRound(playermoney, housemoney, WLrec);
+        if (playermoney<=0){
+            cout << "You cannot continue, you don't have any money left." << endl;
+        }
+        else if (housemoney<=0){
+            cout << "You cannot continue, you have already won!" << endl;
+        }        
+        else {
+            PlayRound(playermoney, housemoney, WLrec);
+        }
         game_menu_2(playermoney, housemoney, WLrec);
     }
     else if (choice=='n') {						// new game (reset the balance, clear previous win/lost statistics)
