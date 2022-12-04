@@ -4,8 +4,7 @@
 #include "DisplayHand.h"
 using namespace std;
 
-//function that takes a hand of cards(a vector) and display the card faces of card in hand
-void displaycards(vector<card> &hand) {
+void displaycards(vector<card> &hand) { // displays the number and suit of every card in the input vector
     vector<card>::iterator itr;
     for (itr=hand.begin(); itr!=hand.end(); itr++) { //loop through the vector
         itr->display();
@@ -13,8 +12,7 @@ void displaycards(vector<card> &hand) {
     }
 }
 
-//function that takes a hand of cards(a vector) and return boolean value of whether the hand contains Ace(s)
-bool has_ace(vector<card> &hand) {
+bool has_ace(vector<card> &hand) { // returns a boolean depending on whether the input vector contains an ace
     vector<card>::iterator itr;
     for (itr=hand.begin(); itr!=hand.end(); itr++) { //loop through the vector
         if (itr->is_ace()) { //check whether the card is an ace
@@ -24,14 +22,17 @@ bool has_ace(vector<card> &hand) {
     return false;
 }
 
-//function that takes a hand of card(a vector) and return total value of the hand
-int total_value(vector<card> &hand) {
+int total_value(vector<card> &hand) { // returns the total summed value of the cards in the input vector as an integer
     int total = 0;
     vector<card>::iterator itr;
     for (itr=hand.begin(); itr!=hand.end(); itr++) {
         total += itr->get_value();
     }
-    if (has_ace(hand)) { //if the hand has an ace and total value +10 is still <=21(not bust), the return the total value of the hand considering the ace as 11
+    /*
+    If the hand contains an ace and total value +10 is still <=21 (not bust), 
+    the function takes the ace's value as 11 instead of 1.
+    */
+    if (has_ace(hand)) { 
         if ((total+10)<=21) {
             return (total+10);
         }
@@ -39,21 +40,20 @@ int total_value(vector<card> &hand) {
     return total;
 }
 
-//function that takes the hand and display its total value on screen
-void displaytotalvalue(vector<card> &hand) {
+void displaytotalvalue(vector<card> &hand) { // displays the total value of the cards in the input vector to the player
     int total = 0;
     vector<card>::iterator itr;
     for (itr=hand.begin(); itr!=hand.end(); itr++) {
         total += itr->get_value();
     }
-    if (total>21) { //if a hand busted display that info on screen
+    if (total>21) { // if the hand has bust
         cout << "Bust (" << total << ")" << endl;
     }
     else if (has_ace(hand)) {
         if ((total+10) > 21) {
             cout << total << endl;
         }
-        else {
+        else { // if the hand contains an ace that can have both 1 OR 11 as its value
             cout << total << " or " << total+10 << endl;
         }
     }
@@ -62,7 +62,7 @@ void displaytotalvalue(vector<card> &hand) {
     }
 }
 
-bool bust(vector<card> &hand) { //function that takes a hand and see if it busted
+bool bust(vector<card> &hand) { // returns a boolean depending on whether the input vector of cards has bust
     int total = 0;
     vector<card>::iterator itr;
     for (itr=hand.begin(); itr!=hand.end(); itr++) {

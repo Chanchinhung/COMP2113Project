@@ -4,7 +4,7 @@
 #include "RoundStat.h"
 using namespace std;
 
-// The game will be saved in a file called "game_save.txt"
+// Every game state is saved in a file named "game_save.txt"
 
 // Function to Load the Game (Load the player/house money; Load the WL stat)
 void LoadGame (int &playermoney, int &housemoney, vector<RoundStat> &WLrec){

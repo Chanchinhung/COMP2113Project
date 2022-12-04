@@ -4,18 +4,21 @@
 #include "Card.h"
 #include "DisplayHand.h"
 
-//function takes the hands of player and house by reference, and return an integer value of which depends on who won
+/*
+Function that takes the hands of the player and the house as input
+and returns an integer that corresponds to the result of the round.
+Return values: 1 (house wins), 2 (player wins), 3 (draw)
+*/ 
 int DetermineWinner(vector<card> &player, vector<card> &house) {
-    // Return values: 1 (house wins), 2 (player wins), 3 (draw)
-    int player_total = total_value(player); //call function to evaluate total value of hands of player and house respectively
-    int house_total = total_value(house);
-    if (player_total < house_total) { //if house won
+    int player_total = total_value(player); // calls function that returns the value of the player's hand
+    int house_total = total_value(house); // calls function that returns the value of the house's hand
+    if (player_total < house_total) { 
         return 1;
     }
-    else if (player_total > house_total) { //if player won
+    else if (player_total > house_total) { 
         return 2;
     }
-    else if ((player.size()==2) && (house.size()!=2) && (player_total==21)){ //player have blackjack while house don't
+    else if ((player.size()==2) && (house.size()!=2) && (player_total==21)){ // player draws a Blackjack and the house does not
         return 2;
     }
     else{

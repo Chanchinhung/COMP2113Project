@@ -20,7 +20,7 @@ void split(int& playermoney, int& housemoney, int& bet, bool& houseprocessed, bo
     player_cards_1.push_back(player_cards[0]);
     player_cards_2.push_back(player_cards[1]);
 
-    //The following is for the player to process their first hand:
+    // first hand is player
     cout << "==========" << endl;
     cout << "First hand" << endl;
     cout << "==========" << endl;
@@ -30,7 +30,7 @@ void split(int& playermoney, int& housemoney, int& bet, bool& houseprocessed, bo
     displaytotalvalue(player_cards_1);
     PlayProcess(playermoney, housemoney, bet, houseprocessed, issamecard, WLrec, player_cards_1, house_cards);
 
-    //The following is for the player to process their second hand:
+    // second hand is played
     house_cards.clear();
     cout << "===========" << endl;
     cout << "Second hand" << endl;
@@ -43,22 +43,18 @@ void split(int& playermoney, int& housemoney, int& bet, bool& houseprocessed, bo
 
 }
 
-bool samecard(vector<card>& hand) {
-    //This bool function is to verify where the first 2 cards the player drawn are the same.
-    char number1, number2; //Declare the variables to store the cards' numbers 
-	
-    //The following is to store the number and suits of the first 2 Cards in Player's hand
+bool samecard(vector<card>& hand) { //returns a boolean depending on whether the first 2 cards drawn by the player have the same number
+    char number1, number2; // declares the variables to store the card numbers 
+    // stores the number and suits of the first 2 cards in player's hand
     number1 = hand[0].get_number();
     number2 = hand[1].get_number();
-    //End of the variables' values storing
-	
     if (number1 == number2) {
         return true;
     }
     return false;
 }
 
-void start_round(int &playermoney, int &housemoney) {
+void start_round(int &playermoney, int &housemoney) { // displays the player's and house's money at the start of each round
     cout << "==============" << endl;
     cout << "Start of Round" << endl;
     cout << "==============" << endl;
@@ -66,16 +62,16 @@ void start_round(int &playermoney, int &housemoney) {
     cout << "House money: $" << housemoney << endl;
 }
 
-void enter_bet(int &bet, int &playermoney) {
+void enter_bet(int &bet, int &playermoney) { // takes player input as their bet at the start of each round
     cout << "Bet: $";
     cin >> bet;
     while ((bet<=0) || (bet>playermoney)) {
-        if (bet<=0) {
+        if (bet<=0) { // ensures that a nonnegative amount is bet
             cout << "You have to bet at least $1" << endl;
             cout << "Bet: $";
             cin >> bet;
         }
-        if (bet>playermoney) {
+        if (bet>playermoney) { // ensures that the player cannot bet more than their remaining money
             cout << "You cannot be bet $" << bet << ", you only have $" << playermoney << " remaining" << endl;
             cout << "Bet: $";
             cin >> bet;
@@ -83,19 +79,19 @@ void enter_bet(int &bet, int &playermoney) {
     }
 }
 
-void player_draw_display() {
+void player_draw_display() { // displays text when the player draws a card
     cout << "=====================" << endl;
     cout << "You have drawn a card" << endl;
     cout << "=====================" << endl;
 }
 
-void house_draw_display() {
+void house_draw_display() { // displays text when the player draws a card
     cout << "==========================" << endl;
     cout << "The house has drawn a card" << endl;
     cout << "==========================" << endl;
 }
 
-void player_action(char &choice) {
+void player_action(char &choice) { // takes player input as their choice during the round
     cout << "Hit (h) | Stand (s) | Double Down (d) | Surrender (x)" << endl;
     cout << "Your choice: ";
     cin >> choice;
@@ -107,15 +103,15 @@ void player_action(char &choice) {
 }
 
 void PlayProcess(int& playermoney, int& housemoney, int& bet, bool& houseprocessed, bool& issamecard, vector<RoundStat>& WLrec, vector<card>& player_cards, vector<card>& house_cards) {
-    //This PlayProcess function is to handle the playing process in a round.
-
-    //declare local variables
-    char choice='a';//to initialise the variable so while loop will execute
+    /*
+    This PlayProcess function handles the process of play for every round.
+    It contains the main game logic for our version of Blackjack.
+    */
+    char choice='a';
     RoundStat temp;
-        
-    while (!((bust(player_cards) || choice == 's'))) {
+    while (!((bust(player_cards) || choice == 's'))) { // the player continues making choices until they bust or they stand
         player_action(choice);
-        if (choice == 'x') {
+        if (choice == 'x') { // the player chooses to surrender
             playermoney -= (bet+1) / 2;
             housemoney += (bet+1) / 2;
             temp.WL = 'L';
@@ -127,7 +123,7 @@ void PlayProcess(int& playermoney, int& housemoney, int& bet, bool& houseprocess
             cout << "You lose " << bet / 2 << endl;
             return;
         }
-        else if (choice == 'd') {
+        else if (choice == 'd') { // the player chooses to double down
             if (playermoney<bet*2)
                 cout << "You don't have enough money left to double down" << endl;
             else{
@@ -141,7 +137,7 @@ void PlayProcess(int& playermoney, int& housemoney, int& bet, bool& houseprocess
                 choice='s';
             }	
         }
-        else if (choice == 'h') {
+        else if (choice == 'h') { // the player chooses to hit
             dealcard(player_cards);
             player_draw_display();
             cout << "Your hand:" << endl;
@@ -163,7 +159,7 @@ void PlayProcess(int& playermoney, int& housemoney, int& bet, bool& houseprocess
     }
     if (houseprocessed == false) {
         cout << "House's turn!" << endl;
-        while (total_value(house_cards) < 17) {
+        while (total_value(house_cards) < 17) { // the house continues drawing cards until their total card value is >=17
             dealcard(house_cards);
             house_draw_display();
             cout << "House's hand:" << endl;
@@ -172,10 +168,10 @@ void PlayProcess(int& playermoney, int& housemoney, int& bet, bool& houseprocess
             displaytotalvalue(house_cards);
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
-        houseprocessed == true; //To ensure that the house will not draw cards for one more time when the player choose to split.
+        houseprocessed == true; // ensures that the house will not draw cards an additional time when the player chooses to split
     }
     else {
-        //The commands in else{} is to display the house's cards without drawing the cards again. 
+        // displays the house's cards without drawing the cards again
         cout << "House's hand:" << endl;
         displaycards(house_cards);
         cout << "House's hand value: " << endl;
@@ -194,6 +190,10 @@ void PlayProcess(int& playermoney, int& housemoney, int& bet, bool& houseprocess
         WLrec.push_back(temp);
         return;
     }
+    /*
+    The result of the round is determined by the DetermineWinner function contained in DetermineWinner.cpp.
+    The function returns an integer depending on whether the player wins, the house wins, or the round ends in a draw.
+    */
     switch (DetermineWinner(player_cards, house_cards)) {
     case 3:
         cout << "=========================================" << endl;
@@ -226,12 +226,20 @@ void PlayProcess(int& playermoney, int& housemoney, int& bet, bool& houseprocess
     }
 }
 
-void PlayRound(int& playermoney, int& housemoney, vector<RoundStat>& WLrec) {
+/*
+Function that initialises the start of every round.
+Every round begins with the player drawing two cards and the house drawing one card.
+If the player draws two cards with the same number, they have the option to split them via the split() function.
+*/
+void PlayRound(int& playermoney, int& housemoney, vector<RoundStat>& WLrec) { 
     vector<card> player_cards;
     vector<card> house_cards;
     int bet;
-    bool houseprocessed = false; //To check whether the house has already drawn cards in a round. If yes, the house will not be 
-    //able to drawn extra cards when the player is playing with his/her split hand.
+    bool houseprocessed = false; 
+    /*
+    Used to check whether the house has already drawn cards in a round. 
+    If yes, the house will not be able to draw additional cards when the player is playing with their second split hand.
+    */
     start_round(playermoney, housemoney);
     enter_bet(bet, playermoney);
     dealcard(house_cards);

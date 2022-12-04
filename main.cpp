@@ -12,9 +12,8 @@ int main(){
     vector<RoundStat> WLrec;
     // display start screen
     display_start();
-    // display start menu
+    // runs game start menu (initialises game)
     game_menu_1(playermoney, housemoney, WLrec);
-    // Note that the game loop is in GameMenu.cpp
-
+    // Note: game loop is contained in GameMenu.cpp
     return 0;
 }

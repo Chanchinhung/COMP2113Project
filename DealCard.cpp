@@ -6,13 +6,17 @@
 #include "DealCard.h"
 using namespace std;
 
-void random_time() { //generate a random seed using system time
+void random_time() { // generates a random seed for rand() using system time
     srand(time(NULL));
 }
 
-//function that takes a vector of card by reference, return the same vector with a new card pushed back
+/*
+Function that takes a vector of cards as input,
+appends a new randomised card to the end of the vector,
+and returns the same vector including the additional card.
+*/ 
 void dealcard(vector<card> &hand) {
-    card *hit_card = new card; //a new card, to be pushed to the vector
+    card *hit_card = new card; // a new card object created in dynamic memory
     int value;
     char number;
     char suit;

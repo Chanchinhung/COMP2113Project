@@ -4,13 +4,13 @@
 
 using namespace std;
 
-void card::initialise(int v, char n, char s) { //initialise the structure Card storing information of a Card
+void card::initialise(int v, char n, char s) { // initialises a "card" object with initial values as inputs
     value = v;
     number = n;
     suit = s;
 }  
 
-void card::display() { //Display information of a Card
+void card::display() { // prints the suit and number of the card
     string s;
     if (suit=='H') {
         s = "Hearts";
@@ -27,15 +27,15 @@ void card::display() { //Display information of a Card
     cout << number << " of " << s;
 }
 
-bool card::is_ace() { //return true if the card is Ace, since Ace is special(can be 1 or 11)
+bool card::is_ace() { // returns true if the card is Ace, since Ace is special(can be 1 or 11)
     return (number == 'A');
 }
 
-int card::get_value() { //return value of the card
+int card::get_value() { // returns value of the card
     return value;
 }
 
-char card::get_number() { //return face of the Card
+char card::get_number() { // return number of the Card
     return number;
 }
 

@@ -7,22 +7,21 @@
 #include "DisplayWLStat.h"
 using namespace std;
 
-//start screen
-void display_start() {
+
+void display_start() { // displays start screen
     cout << "===============================" << endl;
     cout << "Welcome to the Blackjack Casino" << endl;
     cout << "===============================" << endl;
 }
 
-//start menu (displayed at the start of the game)
-void display_gm1() {
+
+void display_gm1() { // displays start menu (shown at the start of the game)
     cout << "Menu:" << endl;
     cout << "New Game (n) | Load Game (l) | Quit Game (q)" << endl;
     cout << "Your Choice: ";
 }
 
-//handling player choice in the start game menu
-void game_menu_1(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) { 
+void game_menu_1(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {  // handles game start menu (initialises game)
     char choice;
     display_gm1();
     cin >> choice;
@@ -49,15 +48,14 @@ void game_menu_1(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
     }
 }
 
-//In-Game Menu (displayed in the middle of the game)
-void display_gm2() {
+
+void display_gm2() { // displays in-game menu (displayed after each round)
     cout << "Options:" << endl;
     cout << "Continue (c) | New Game (n) | Save game (s) | Quit game (q) | Show Win/Loss History (h)" << endl;
     cout << "Your Choice: ";
 }
 
-//handling player choice in the second game menu
-void game_menu_2(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
+void game_menu_2(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) { // handles game menu after each round
     char choice;
     display_gm2();
     cin >> choice;
@@ -115,8 +113,7 @@ void game_menu_2(int &playermoney, int &housemoney, vector<RoundStat> &WLrec) {
     }
 }
 
-//exit screen
-void display_exit() {
+void display_exit() { // displays exit screen
     cout << "===================================================" << endl;
     cout << "Thank you for playing Blackjack. See you next time!" << endl;
     cout << "===================================================" << endl;
