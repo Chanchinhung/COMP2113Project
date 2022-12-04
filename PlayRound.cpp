@@ -48,8 +48,8 @@ bool samecard(vector<card>& hand) {
     char number1, number2; //Declare the variables to store the cards' numbers 
 	
     //The following is to store the number and suits of the first 2 Cards in Player's hand
-    number1 = hand[0].number;
-    number2 = hand[1].number;
+    number1 = hand[0].get_number();
+    number2 = hand[1].get_number();
     //End of the variables' values storing
 	
     if (number1 == number2) {
