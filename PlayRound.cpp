@@ -234,6 +234,13 @@ void PlayRound(int& playermoney, int& housemoney, vector<RoundStat>& WLrec) {
     //able to drawn extra cards when the player is playing with his/her split hand.
     start_round(playermoney, housemoney);
     enter_bet(bet, playermoney);
+    dealcard(house_cards);
+    house_draw_display();
+    cout << "House's hand:" << endl;
+    displaycards(house_cards);
+    cout << "House's hand value: " << endl;
+    displaytotalvalue(house_cards);
+    std::this_thread::sleep_for(std::chrono::seconds(1));
     for (int i = 0; i < 2; i++) {
         dealcard(player_cards);
         player_draw_display();
