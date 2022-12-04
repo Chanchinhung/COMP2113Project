@@ -8,7 +8,7 @@ Name: Robert Miles Ryan Reese
 UID:  3035743584  
 Name: Arnold  
 UID:  3035569158
-Name: Zay  
+Name: Chan Chin Hung (Zay)  
 UID:  3035788625
 
 We have created a text-based version of the popular casino game "Blackjack" written in C++.
