@@ -46,7 +46,7 @@ Typical procedure of play:
 			The player immediately loses and loses half their bet.
 		On special occasions where the player is dealt 2 cards with same card face, e.g., two K, they have the following extra option.
 		E. "Split"
-			The player can split the two cards into two hands, place a new bet equal to the amount they placed for this round, and play the two hands simultaneously.
+			The player can split the two cards into two hands, place a new bet equal to the amount they placed for this round, and play the two hands simultaneously. We have decided to let the player split even if their money left is not enough for a second bet, since it's very rare to be able to split, and we don't want players to miss that.
 4.  
 	After the player chooses to "stand", or "double down" wihtout busting, the house's hand will be resolved. 
 	The house will continually draw cards until the their card total is 17 or higher.  
